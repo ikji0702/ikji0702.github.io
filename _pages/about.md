@@ -6,12 +6,6 @@ redirect_from:
   - /about/
   - /about.html
 ---
-layout: archive
-permalink: /year-archive/
-title: "Blog posts"
-author_profile: true
-redirect_from:
-  - /wordpress/blog-posts/
 ---
 
 {% include base_path %}
@@ -19,7 +13,7 @@ redirect_from:
 {% for post in site.posts %}
   {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
   {% if year != written_year %}
-    <h2 id="{{ year | slugify }}" class="archive__subtitle">{{ year }}</h2>
+    <h2 id="{{ year | slugify }}"></h2>
     {% capture written_year %}{{ year }}{% endcapture %}
   {% endif %}
   {% include archive-single.html %}
