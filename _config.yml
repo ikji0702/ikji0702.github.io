@@ -7,6 +7,7 @@
 # server process.
 
 # Basic Site Settings
+theme : minima
 locale                   : "ko-KR"
 site_theme               : "default"
 title                    : "ikjiikji"
@@ -165,6 +166,7 @@ exclude:
   - .bundle
   - .github
   - .jekyll-assets-cache
+  - jekyll-remote-theme
   - .sass-cache
   - assets/js/_main.js
   - assets/js/plugins
