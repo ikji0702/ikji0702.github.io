@@ -1,7 +1,7 @@
 
 /* 기본 본문 영역 */
 /* Markdown 컨텐트를 감싸는 클래스 (Minima, GitHub Pages 공통) */
-.markdown-body {
+body {
   /* 본문 기본 색상 (선택 사항) */
   color: #b1b1b1;
   padding: 2rem 3rem;       /* 상하 2rem, 좌우 3rem */
