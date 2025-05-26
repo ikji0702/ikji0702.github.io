@@ -1,12 +1,12 @@
 
 /* 기본 본문 영역 */
 body, .markdown-body {
-  color: #333333 !important;
+  color: #b5b5b5 !important;
 }
 
 /* 링크 색상 바꾸기 (옵션) */
 a {
-  color: #0066cc !important;
+  color: #4475a6 !important;
 }
 
 /* 코드 블록 텍스트 색상 */
