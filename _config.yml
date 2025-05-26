@@ -7,7 +7,6 @@
 # server process.
 
 # Basic Site Settings
-theme : minima
 locale                   : "ko-KR"
 site_theme               : "default"
 title                    : "ikjiikji"
