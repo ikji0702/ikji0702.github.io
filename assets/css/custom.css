@@ -1,0 +1,29 @@
+/* assets/css/custom.css */
+
+/* 전체 본문(wrapper)의 최대 너비를 100%로 늘리고, 패딩을 조정 */
+.wrapper {
+  max-width: 100% !important;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/* 콘텐츠 영역만 조절하고 싶다면 .container 사용 */
+.container {
+  max-width: 1200px !important;  /* 원하는 폭(px 또는 %) */
+  width: 150%;
+}
+
+   /* assets/css/custom.css */
+
+   /* (1) Google Fonts import 또는 @font-face 정의가 이미 들어갔다는 전제 */
+
+   /* (2) 본문, 헤더 전역 폰트 적용 */
+   body, h1, h2, h3, h4, h5, h6 {
+     font-family: 'Pretendard', system-ui, -apple-system;
+   }
+
+   /* (3) 코드 블록 따로 지정하고 싶다면 (선택) */
+   pre, code {
+     font-family: 'Fira Code', monospace;
+   }
+   
