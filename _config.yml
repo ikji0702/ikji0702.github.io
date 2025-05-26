@@ -73,7 +73,7 @@ author:
   weibo            : # Username
   wikipedia        : # Username
   xing             : # Username
-  youtube          : "@ikjiikji"
+  youtube          : "ikjiikji"
   zhihu            : # Username
 
 # Publication Category - The following the list of publication categories and their headings
@@ -230,6 +230,11 @@ collections:
 
 # These settings control how pages and collections are included in the site
 defaults:
+  - scope:
+      path: ""      # 모든 페이지에 적용
+    values:
+      css:
+        - /assets/css/custom.css
   # _posts
   - scope:
       path: ""
@@ -302,6 +307,7 @@ timezone: Etc/UTC # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 plugins:
   - jekyll-feed
   - jekyll-gist
+  - jekyll-seo-tag
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-redirect-from
