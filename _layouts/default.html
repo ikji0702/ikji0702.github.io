@@ -4,6 +4,7 @@ layout: compress
 
 {% include base_path %}
 
+<link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
 <!doctype html>
 <html lang="{{ site.locale | slice: 0,2 }}" class="no-js"{% if site.site_theme == "dark" %} data-theme="dark"{% endif %}>
   <head>
@@ -12,7 +13,6 @@ layout: compress
   </head>
 
   <body>
-<link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
     {% include browser-upgrade.html %}
     {% include masthead.html %}
 
