@@ -10,5 +10,5 @@
 /* 콘텐츠 영역만 조절하고 싶다면 .container 사용 */
 .container {
   max-width: 1200px !important;  /* 원하는 폭(px 또는 %) */
-  width: 100%;
+  width: 150%;
 }
