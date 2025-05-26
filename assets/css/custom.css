@@ -1,15 +1,29 @@
 
 /* 기본 본문 영역 */
-body, .markdown-body {
-  color: #b5b5b5 !important;
+/* Markdown 컨텐트를 감싸는 클래스 (Minima, GitHub Pages 공통) */
+.markdown-body {
+  /* 본문 기본 색상 (선택 사항) */
+  color: #dfdfdf;
 }
 
-/* 링크 색상 바꾸기 (옵션) */
-/* Ua {
-  color: #4475a6 !important;
-} */
+/* 1) 제목 색상 지정 */
+.markdown-body h1 {
+  color: #ffffff;
+}
+.markdown-body h2 {
+  color: #ffffff;
+}
+.markdown-body h3 {
+  color: #ffffff;
+}
+/* 필요에 따라 h4, h5, h6 도 추가 가능 */
+.markdown-body h4 { color: #ffffff; }
+.markdown-body h5 { color: #dfdfdf; }
+.markdown-body h6 { color: #dfdfdf; }
 
-/* 코드 블록 텍스트 색상 
-code, pre {
-  color: #222222 !important;
-}*/
+/* 2) 굵은 텍스트(bold) 색상 지정 */
+/* 마크다운에서 **bold**는 <strong> 또는 <b> 태그로 렌더링됩니다. */
+.markdown-body strong,
+.markdown-body b {
+  color: #ffffff;  
+}
