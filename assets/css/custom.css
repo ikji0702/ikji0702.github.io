@@ -5,10 +5,13 @@ body {
   color: #d0d0d0;
 }
 
+.page {
+  width: 130%;
+}
+
 .page__content {
   font-size: 16px;
   line-height: 2.0;         /* 행간 1.6배 */
-  width: 130%;
 }
 
 .page__date {
