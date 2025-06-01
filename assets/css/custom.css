@@ -4,11 +4,11 @@ body {
   /* 본문 기본 색상 (선택 사항) */
   color: #d0d0d0;
   padding: 2rem 1rem;       /* 상하 2rem, 좌우 3rem */
-  line-height: 2.0;         /* 행간 1.6배 */
 }
 
 .markdown-body {
   font-size: 14px;
+  line-height: 2.0;         /* 행간 1.6배 */
 }
 
 .page__content {
