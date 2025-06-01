@@ -7,6 +7,14 @@ body {
   line-height: 2.0;         /* 행간 1.6배 */
 }
 
+.markdown-body {
+  font-size: 14px;
+}
+
+.page__content {
+  font-size: 14px;
+}
+
 /* 문단 간 간격 (p 태그 사이) */
 body p {
   margin-bottom: 0.1em;     /* 문단 아래 여백 3em */
@@ -14,7 +22,7 @@ body p {
 
 /* 리스트 항목 간격 */
 body li + li {
-  /* margin-top: 0.7em; */
+  margin-top: 0.7em;
 }
 
 /* 1) 제목 색상 지정 */
