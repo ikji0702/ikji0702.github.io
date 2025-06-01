@@ -9,7 +9,7 @@ body {
 
 /* 문단 간 간격 (p 태그 사이) */
 body p {
-  margin-bottom: 4em;     /* 문단 아래 여백 3em */
+  margin-bottom: 0.1em;     /* 문단 아래 여백 3em */
 }
 
 /* 리스트 항목 간격 */
