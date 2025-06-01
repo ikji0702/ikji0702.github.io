@@ -5,6 +5,8 @@ title: "Study"
 author_profile: true
 ---
 
+{% include base_path %}
+
 {% for item in site.study %}
   <h2><a href="{{ item.url }}">{{ item.title }}</a></h2>
   <p>{{ item.summary }}</p>
