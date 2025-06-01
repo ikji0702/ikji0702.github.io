@@ -227,9 +227,6 @@ collections:
   talks:
     output: true
     permalink: /:collection/:path/
-  study:
-    output : true
-    ppermalink: /study/:name/
 
 
 # These settings control how pages and collections are included in the site
