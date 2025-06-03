@@ -6,6 +6,8 @@ body {
 }
 
 .page {
+  --global-border-color: #2f2f2f;
+  --global-code-background-color: #2f2f2f;
   padding-left: 4%;
   padding-right: 4%;
 }
