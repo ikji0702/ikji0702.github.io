@@ -67,7 +67,7 @@ Vulkan은 하드웨어를 더 효율적으로 활용하는것으로 유명하다
 
 <a href="https://beebom.com/directx-vs-vulkan/">이미지 출처 : DirectX vs Vulkan: Performance Cmoparison</a>
 
-Vuikan이 최소 FPS가 더 높고 전반적으로 안정적인 모습이다. DirectX 12의 최대 FPS는 Vulkan보다 높지만 최소 FPS가 적어 순간적인 프레임 드랍이 느껴질 수 있다. Red Dead Redemption 2 외에도 <a hraf="DirectX vs Vulkan: Performance Cmoparison">DirectX vs Vulkan: Performance Cmoparison</a>의 내용을 참고하면, Path of Exile 게임의 API 선택 옵션 DirectX 11 vs DirectX 12 vs Vulkan 비교에서도 Vulkan이 가장 좋은 결과를 보여주었다. 
+Vulkan이 최소 FPS가 더 높고 전반적으로 안정적인 모습이다. DirectX 12의 최대 FPS는 Vulkan보다 높지만 최소 FPS가 적어 순간적인 프레임 드랍이 느껴질 수 있다. Red Dead Redemption 2 외에도 <a hraf="DirectX vs Vulkan: Performance Cmoparison">DirectX vs Vulkan: Performance Cmoparison</a>의 내용을 참고하면, Path of Exile 게임의 API 선택 옵션 DirectX 11 vs DirectX 12 vs Vulkan 비교에서도 Vulkan이 가장 좋은 결과를 보여주었다. 
 
 하지만 이는 Intel i5 CPU, RTX 4050 PC를 기준으로 테스트 한 사양이기 때문에 유저 각자의 하드웨어에 따라 다르게 나타날 수 있다. 실제로 많은 게임에서 이런 선택 옵션을 제공하는 이유도, 하드웨어 환경마다 체감되는 성능이 다르기 때문이다.
 
@@ -98,7 +98,7 @@ GPU가 처음 등장했을 때부터 개발자들은 더 좋은, 더 큰 텍스�
 #### S3TC/DXT/BCn (데스크탑)
 
 - 4x4 블록, 4bpp, 고정된 용량·품질
-  - (bpp : 1픽셀 당 비트 수, 낮을수록 더 압축)
+  - **bpp : 1픽셀 당 비트 수, 낮을수록 더 압축**
 - 알파를 넣으려면 별도 블록 필요.
 - 오랜 역사가 있는 데스크탑 표준 포맷. 대부분의 PC게임에서 사용
 
@@ -142,6 +142,12 @@ GPU가 처음 등장했을 때부터 개발자들은 더 좋은, 더 큰 텍스�
 
 - **IQ**: 2는 거의 원본, 0이면 딱 쓸만한 정도의 한계, -2는 눈에 띄게 품질 저하.
 - **bpp**: 낮을수록 용량이 적지만, 품질도 그만큼 희생.
+
+위 이미지는 각 텍스처 포맷이 실제 노말맵에 어떤 품질 차이를 만드는지를 보여준다. 쪽은 압축 전(원본) 이미지이고, 가운데는 많이 쓰이는 BC3n(DXT5nm, 8bpp) 포맷, 오른쪽은 최신 ASTC 5x5(5.12bpp) 포맷으로 압축된 결과다. 이미지만 봐도, ASTC 5x5가 더 적은 용량으로도 블러나 경계선의 손실이 훨씬 적고, 원본에 가까운 느낌을 준다.
+
+표를 보면 각 포맷마다 bpp, 품질(IQ), 그리고 실제 시각적으로 보이는 특징(아티팩트, 경계선 손실 등)이 정리되어 있다. 
+
+예를 들어, ASTC 4x4는 거의 원본에 가까운 품질을 제공하면서도 효율적이고 ASTC 5x5는 품질을 살리면서 용량을 크게 줄일 수 있는 최대 마지노선 역할을 한다. 반면, BC3n은 블러·노이즈가 발생하고 경계선 AA(안티앨리어싱)도 일부 손실되는 문제가 있다. 그보다 더 낮은 bpp 포맷들은 BC3n보다도 눈에 띄게 품질이 나빠진다.
 
 &nbsp;&nbsp;
 
