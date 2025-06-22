@@ -34,7 +34,7 @@ DLSS(딥러닝 슈퍼 샘플링), 레이트레이싱 같은 첨단 기술을 설
   - 멀티스레드, DXR(실시간 레이트레이싱) 등 최신 기술을 두루 지원
 
   > DirectX의 핵심 개발자 Alex St John은 인터뷰에서 "DirectX라고 불리는 이유는 운영체제를 우회하고, Windows를 밀어내고, 메모리에서 제거하고, 게임과 리소스를 두고 경쟁하는 모든 필요없는 데이터를 없애고, 그냥 게임이 실행되도록 하기 위해 설계되었기 때문"이라고 밝혔다. 즉, 처음부터 **게임 성능 최우선**으로 만들어진 API다.
-  > <a hraf="https://www.shacknews.com/article/46338/alex-st-john-interview">Alex St John Interview 참고</a>
+  > <a href="https://www.shacknews.com/article/46338/alex-st-john-interview">Alex St John Interview 참고</a>
 
 - **🌋Vulkan**
   - Khronos Group에서 관리하는 차세대 크로스플랫폼 API.
@@ -67,7 +67,7 @@ Vulkan은 하드웨어를 더 효율적으로 활용하는것으로 유명하다
 
 <a href="https://beebom.com/directx-vs-vulkan/">이미지 출처 : DirectX vs Vulkan: Performance Cmoparison</a>
 
-Vulkan이 최소 FPS가 더 높고 전반적으로 안정적인 모습이다. DirectX 12의 최대 FPS는 Vulkan보다 높지만 최소 FPS가 적어 순간적인 프레임 드랍이 느껴질 수 있다. Red Dead Redemption 2 외에도 <a hraf="DirectX vs Vulkan: Performance Cmoparison">DirectX vs Vulkan: Performance Cmoparison</a>의 내용을 참고하면, Path of Exile 게임의 API 선택 옵션 DirectX 11 vs DirectX 12 vs Vulkan 비교에서도 Vulkan이 가장 좋은 결과를 보여주었다. 
+Vulkan이 최소 FPS가 더 높고 전반적으로 안정적인 모습이다. DirectX 12의 최대 FPS는 Vulkan보다 높지만 최소 FPS가 적어 순간적인 프레임 드랍이 느껴질 수 있다. Red Dead Redemption 2 외에도 <a href="DirectX vs Vulkan: Performance Cmoparison">DirectX vs Vulkan: Performance Cmoparison</a>의 내용을 참고하면, Path of Exile 게임의 API 선택 옵션 DirectX 11 vs DirectX 12 vs Vulkan 비교에서도 Vulkan이 가장 좋은 결과를 보여주었다. 
 
 하지만 이는 Intel i5 CPU, RTX 4050 PC를 기준으로 테스트 한 사양이기 때문에 유저 각자의 하드웨어에 따라 다르게 나타날 수 있다. 실제로 많은 게임에서 이런 선택 옵션을 제공하는 이유도, 하드웨어 환경마다 체감되는 성능이 다르기 때문이다.
 
@@ -126,7 +126,7 @@ GPU가 처음 등장했을 때부터 개발자들은 더 좋은, 더 큰 텍스�
 
 ![img](./../images/2025-06-16-%ED%94%8C%EB%9E%AB%ED%8F%BC/image001.png)
 
-<a hraf="https://developer.nvidia.com/astc-texture-compression-for-game-assets">이미지 출처 : Using ASTC Texture Compression for Game Assets</a>
+<a href="https://developer.nvidia.com/astc-texture-compression-for-game-assets">이미지 출처 : Using ASTC Texture Compression for Game Assets</a>
 
 | Codec        | bpp      | 용량(기준 대비) | 품질(IQ) | 비고                                 |
 | :----------- | :------- | :-------------- | :------- | :----------------------------------- |
