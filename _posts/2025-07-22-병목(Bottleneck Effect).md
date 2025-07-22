@@ -97,7 +97,7 @@ Computer Shader와 Render Graph에 대해 가볍게 훑어볼 예정인데, 두 
 
 
 
-## Compute Shader 살짝 햝아보기 😋
+## Compute Shader 살짝 핥아보기 😋
 
 컴퓨트 셰이더(Compute Shader)는 간단히 말해, **GPU에게 그래픽 이외의 연산 작업까지 시킬 수 있도록 확장된 기능**이다. 본래 GPU는 **동일한 작업을 대량의 데이터에 병렬 처리**할 수 있는 구조 덕분에, 주로 화면에 무언가를 그리는 렌더링 작업에 사용되어 왔다.
 
@@ -146,7 +146,7 @@ Vertex Shader → Tessellation → Geometry Shader → Rasterization → Pixel S
 
 
 
-## 유니티 Render Graph 살짝 햝아보기 😋
+## 유니티 Render Graph 살짝 핥아보기 😋
 
 최신 그래픽 엔진에서는 GPU 리소스를 사용자가 직접 생성한 힙(heap)의 메모리 위치에 배치할 수 있는 기능을 제공하고 있다.
 
