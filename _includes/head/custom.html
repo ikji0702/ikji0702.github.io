@@ -2,36 +2,23 @@
 
 <!-- start custom head snippets -->
 
-<!-- Theme toggle: localStorage 저장된 테마 즉시 적용 (깜빡임 방지) -->
+<!-- Theme: localStorage 즉시 적용. 아이콘은 CSS content로 처리 (JS 타이밍 문제 없음) -->
 <script>
 (function() {
   var saved = localStorage.getItem('theme');
   if (saved) document.documentElement.setAttribute('data-theme', saved);
 
-  function updateIcon(theme) {
-    var icon = document.getElementById('theme-icon');
-    if (icon) icon.textContent = theme === 'dark' ? '☀' : '🌙';
-  }
-
   window.toggleTheme = function() {
     var t = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', t);
     localStorage.setItem('theme', t);
-    updateIcon(t);
   };
 
-  document.addEventListener('DOMContentLoaded', function() {
-    var theme = document.documentElement.getAttribute('data-theme') || 'dark';
-    updateIcon(theme);
-
-    var btn = document.getElementById('theme-toggle-btn');
-    if (btn) {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.toggleTheme();
-      });
-    }
-  });
+  /* 이벤트 위임: 캡처 단계에서 처리 (greedy-nav 간섭 방지) */
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest ? e.target.closest('#theme-toggle-btn') : null;
+    if (btn) { e.preventDefault(); window.toggleTheme(); }
+  }, true);
 })();
 </script>
 

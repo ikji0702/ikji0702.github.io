@@ -1,66 +1,245 @@
-/* ==========================================================================
-   DARK THEME OVERRIDE
-   _dark.scss 기본 배경(#474747)이 너무 밝아 여기서 진한 다크로 재정의
-   ========================================================================== */
+/* ================================================================
+   IKJIIKJI — FULL SITE REDESIGN
+   ================================================================ */
+
+/* ----------------------------------------------------------------
+   1. DESIGN TOKENS (테마 변수)
+   ---------------------------------------------------------------- */
+
+:root {
+  /* 라이트 테마 */
+  --bg:          #f5f5f5;
+  --bg-surface:  #ffffff;
+  --bg-elevated: #ebebeb;
+  --accent:      #5b5bd6;
+  --accent-dim:  rgba(91, 91, 214, 0.12);
+  --text:        #111111;
+  --text-2:      #555555;
+  --text-3:      #999999;
+  --border:      #e0e0e0;
+  --border-2:    #cccccc;
+  --code-bg:     #f0f0f0;
+  --code-text:   #333333;
+  --shadow:      rgba(0,0,0,0.08);
+  --shadow-lg:   rgba(0,0,0,0.16);
+}
 
 html[data-theme="dark"] {
-  --global-bg-color: #1a1a1a;
-  --global-footer-bg-color: #111111;
-  --global-text-color: #d0d0d0;
-  --global-text-color-light: #888888;
-  --global-border-color: #2e2e2e;
-  --global-code-background-color: #252525;
-  --global-code-text-color: #c9d1d9;
-  --global-link-color: #52adc8;
-  --global-link-color-hover: #3a8ba8;
+  --bg:          #0d0d0d;
+  --bg-surface:  #141414;
+  --bg-elevated: #1c1c1c;
+  --accent:      #818cf8;
+  --accent-dim:  rgba(129, 140, 248, 0.12);
+  --text:        #efefef;
+  --text-2:      #a0a0a0;
+  --text-3:      #606060;
+  --border:      #252525;
+  --border-2:    #333333;
+  --code-bg:     #151515;
+  --code-text:   #c9d1d9;
+  --shadow:      rgba(0,0,0,0.4);
+  --shadow-lg:   rgba(0,0,0,0.6);
 }
 
-html[data-theme="dark"] .masthead,
-html[data-theme="dark"] .greedy-nav,
-html[data-theme="dark"] .masthead__menu-item {
-  background-color: #1a1a1a;
+/* 기존 프레임워크 변수 오버라이드 */
+html[data-theme="dark"] {
+  --global-bg-color:                #0d0d0d;
+  --global-text-color:              #efefef;
+  --global-text-color-light:        #a0a0a0;
+  --global-border-color:            #252525;
+  --global-code-background-color:   #151515;
+  --global-code-text-color:         #c9d1d9;
+  --global-link-color:              #818cf8;
+  --global-link-color-hover:        #a78bfa;
+  --global-link-color-visited:      #6d7af5;
+  --global-masthead-link-color:     #efefef;
+  --global-masthead-link-color-hover: #818cf8;
+  --global-footer-bg-color:         #0a0a0a;
+  --global-fig-caption-color:       #606060;
+  --global-thead-color:             #1c1c1c;
+  --global-base-color:              #252525;
 }
 
-html[data-theme="dark"] .hidden-links {
-  background: #242424;
-  border-color: #2e2e2e;
+/* ----------------------------------------------------------------
+   2. 테마 토글 아이콘 (CSS로 처리 — JS 타이밍 무관)
+   ---------------------------------------------------------------- */
+
+#theme-icon::before {
+  font-style: normal;
+  font-size: 1em;
+  line-height: 1;
 }
 
-html[data-theme="dark"] .hidden-links::after {
-  border-color: #242424 transparent;
+html[data-theme="dark"]  #theme-icon::before { content: "☀"; }
+html[data-theme="light"] #theme-icon::before { content: "🌙"; }
+
+/* ----------------------------------------------------------------
+   3. MASTHEAD (네비게이션 바)
+   ---------------------------------------------------------------- */
+
+.masthead {
+  background: transparent !important;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid var(--border) !important;
 }
 
-html[data-theme="dark"] .page__footer {
-  background-color: #111111;
+html[data-theme="dark"] .masthead {
+  background: rgba(13, 13, 13, 0.85) !important;
 }
 
-/* ==========================================================================
-   TYPOGRAPHY
-   ========================================================================== */
+html[data-theme="light"] .masthead {
+  background: rgba(245, 245, 245, 0.88) !important;
+}
+
+.greedy-nav,
+.masthead__menu-item,
+.greedy-nav .visible-links li {
+  background: transparent !important;
+}
+
+/* 사이트 제목 */
+.masthead__menu-item--lg a {
+  font-weight: 800 !important;
+  letter-spacing: -0.02em;
+  color: var(--accent) !important;
+  font-size: 1.05em;
+}
+
+/* nav 링크 */
+.greedy-nav .visible-links a {
+  color: var(--text-2) !important;
+  font-size: 0.85em;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: color 0.15s;
+}
+
+.greedy-nav .visible-links a:hover {
+  color: var(--accent) !important;
+}
+
+.greedy-nav .visible-links a::before {
+  background: var(--accent) !important;
+  height: 2px;
+}
+
+/* 토글 버튼 */
+#theme-toggle a {
+  color: var(--text-3) !important;
+  font-size: 1em;
+  transition: color 0.15s;
+}
+#theme-toggle a:hover {
+  color: var(--accent) !important;
+}
+#theme-toggle a::before {
+  display: none !important;
+}
+
+/* 숨김 드롭다운 메뉴 */
+html[data-theme="dark"] .greedy-nav .hidden-links {
+  background: #1c1c1c;
+  border-color: var(--border);
+}
+html[data-theme="dark"] .greedy-nav .hidden-links a {
+  color: var(--text) !important;
+}
+html[data-theme="dark"] .greedy-nav .hidden-links::after {
+  border-color: #1c1c1c transparent;
+}
+
+/* ----------------------------------------------------------------
+   4. SIDEBAR & AUTHOR PROFILE
+   ---------------------------------------------------------------- */
+
+.sidebar {
+  border-right: 1px solid var(--border);
+}
+
+.author__avatar img {
+  border: 3px solid var(--border) !important;
+  box-shadow: 0 0 0 2px var(--accent), 0 8px 24px var(--shadow-lg);
+  transition: box-shadow 0.3s;
+}
+
+.author__avatar img:hover {
+  box-shadow: 0 0 0 3px var(--accent), 0 12px 32px var(--shadow-lg);
+}
+
+.author__name {
+  color: var(--text) !important;
+  font-weight: 700 !important;
+  font-size: 1em !important;
+  letter-spacing: -0.01em;
+}
+
+.author__bio {
+  color: var(--text-2) !important;
+  font-size: 0.78em !important;
+  line-height: 1.6;
+}
+
+.author__urls-wrapper button {
+  display: none !important; /* 데스크탑에서 Follow 버튼 숨김 */
+}
+
+.author__urls {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.author__urls li a {
+  color: var(--text-2) !important;
+  font-size: 0.78em !important;
+  padding: 3px 0 !important;
+  transition: color 0.15s;
+}
+
+.author__urls li a:hover {
+  color: var(--accent) !important;
+  text-decoration: none !important;
+}
+
+.author__desktop {
+  color: var(--text-3) !important;
+  font-size: 0.78em !important;
+}
+
+/* ----------------------------------------------------------------
+   5. MAIN CONTENT LAYOUT
+   ---------------------------------------------------------------- */
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+}
 
 .page {
-  padding-left: 2%;
-  padding-right: 2%;
+  padding-left: 2em;
+  padding-right: 2em;
 }
+
+/* ----------------------------------------------------------------
+   6. TYPOGRAPHY
+   ---------------------------------------------------------------- */
 
 .page__content {
   font-size: 15px;
-  line-height: 1.9;
+  line-height: 1.95;
+  color: var(--text);
 }
 
 .page__content p {
-  margin-bottom: 1em;
+  margin-bottom: 1.1em;
 }
 
 .page__content li + li {
-  margin-top: 0.35em;
+  margin-top: 0.3em;
 }
 
-.page__date {
-  font-size: 12px;
-}
-
-/* 다크 테마 제목 색상 */
+/* 제목 */
 html[data-theme="dark"] h1,
 html[data-theme="dark"] h2,
 html[data-theme="dark"] h3,
@@ -70,7 +249,7 @@ html[data-theme="dark"] h4 {
 
 html[data-theme="dark"] h5,
 html[data-theme="dark"] h6 {
-  color: #b1b1b1;
+  color: #b0b0b0;
 }
 
 html[data-theme="dark"] strong,
@@ -78,65 +257,228 @@ html[data-theme="dark"] b {
   color: #ffffff;
 }
 
-/* 다크 테마 코드 블록 */
-html[data-theme="dark"] pre {
-  background: #1e1e1e;
-  border: 1px solid #2e2e2e;
+/* 본문 h2 — 액센트 밑줄 */
+.page__content h2 {
+  position: relative;
+  margin-top: 2.2em;
+  padding-bottom: 0.45em;
+  border-bottom: none !important;
+}
+
+.page__content h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 2.5em;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+/* 본문 h3 */
+.page__content h3 {
+  margin-top: 1.8em;
+  color: var(--text);
+}
+
+html[data-theme="dark"] .page__content h3 {
+  color: #e0e0e0;
+}
+
+/* 포스트 제목 */
+.page__title {
+  font-size: 1.7em !important;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+}
+
+.page__date,
+.page__meta {
+  color: var(--text-3);
+  font-size: 0.78em;
+}
+
+/* blockquote */
+.page__content blockquote {
+  border-left: 3px solid var(--accent) !important;
+  background: var(--accent-dim);
+  padding: 0.8em 1.2em;
+  border-radius: 0 6px 6px 0;
+  margin: 1.5em 0;
+  font-style: normal;
+  color: var(--text-2);
+}
+
+html[data-theme="dark"] .page__content blockquote {
+  color: #b8b8b8;
+}
+
+/* 수평선 */
+.page__content hr {
+  border-color: var(--border);
+  margin: 2em 0;
+}
+
+/* ----------------------------------------------------------------
+   7. CODE BLOCKS
+   ---------------------------------------------------------------- */
+
+/* 인라인 코드 */
+a > code,
+figcaption > code,
+li > code,
+p > code,
+td > code {
+  background: var(--code-bg) !important;
+  color: var(--accent) !important;
+  border: 1px solid var(--border) !important;
   border-radius: 4px;
+  padding: 0.1em 0.45em;
+  font-size: 0.85em;
 }
 
-/* 라이트 테마 제목 색상 */
-html[data-theme="light"] h1,
-html[data-theme="light"] h2,
-html[data-theme="light"] h3 {
-  color: #1a1a1a;
+html[data-theme="dark"] a > code,
+html[data-theme="dark"] figcaption > code,
+html[data-theme="dark"] li > code,
+html[data-theme="dark"] p > code,
+html[data-theme="dark"] td > code {
+  color: #a78bfa !important;
 }
 
-/* ==========================================================================
-   TIMELINE 글 목록
-   ========================================================================== */
+/* 코드 블록 */
+html[data-theme="dark"] pre {
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.2em 1.4em;
+  overflow-x: auto;
+  font-size: 0.85em;
+  line-height: 1.65;
+  box-shadow: 0 4px 16px var(--shadow);
+}
+
+html[data-theme="dark"] pre > code {
+  color: var(--code-text);
+  background: transparent;
+  border: none;
+}
+
+/* highlight 컨테이너 */
+html[data-theme="dark"] .highlight {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 1.2em 0;
+  overflow: hidden;
+}
+
+html[data-theme="dark"] .highlight pre {
+  border: none;
+  margin: 0;
+  box-shadow: none;
+}
+
+/* ----------------------------------------------------------------
+   8. TABLES
+   ---------------------------------------------------------------- */
+
+.page__content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5em 0;
+  font-size: 0.88em;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.page__content th {
+  background: var(--bg-elevated);
+  color: var(--text);
+  padding: 0.7em 1em;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--border-2);
+}
+
+.page__content td {
+  padding: 0.6em 1em;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-2);
+}
+
+html[data-theme="dark"] .page__content tr:nth-child(even) td {
+  background: rgba(255,255,255,0.02);
+}
+
+html[data-theme="dark"] .page__content tr:hover td {
+  background: rgba(255,255,255,0.04);
+}
+
+/* ----------------------------------------------------------------
+   9. IMAGES
+   ---------------------------------------------------------------- */
+
+.page__content img {
+  border-radius: 8px;
+  box-shadow: 0 4px 20px var(--shadow);
+  transition: box-shadow 0.2s;
+  max-width: 100%;
+}
+
+.page__content img:hover {
+  box-shadow: 0 8px 32px var(--shadow-lg);
+}
+
+/* ----------------------------------------------------------------
+   10. TIMELINE (글 목록)
+   ---------------------------------------------------------------- */
 
 .timeline-year {
-  margin: 1.8em 0 0.6em;
+  margin: 2em 0 0.5em;
   padding-bottom: 0.3em;
-  font-size: 1.1em;
-  color: var(--global-text-color-light);
-  border-bottom: 1px solid var(--global-border-color);
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  border-bottom: 1px solid var(--border);
 }
 
 .timeline {
   position: relative;
-  padding-left: 1em;
-  border-left: 2px solid var(--global-border-color);
+  padding-left: 0;
+  border-left: none;
   margin-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .timeline-item {
   display: flex;
-  align-items: flex-start;
-  gap: 1em;
-  padding: 0.7em 0.5em;
-  border-bottom: 1px solid var(--global-border-color);
-  border-radius: 4px;
-  transition: background 0.15s, padding-left 0.15s;
-}
-
-.timeline-item:last-child {
-  border-bottom: none;
+  align-items: center;
+  gap: 1.2em;
+  padding: 0.75em 0.9em;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
 }
 
 .timeline-item:hover {
-  background: var(--global-border-color);
-  padding-left: 1em;
+  background: var(--bg-elevated);
+  border-color: var(--border);
 }
 
 .timeline-date {
   flex-shrink: 0;
   width: 44px;
   font-size: 0.72em;
-  color: var(--global-text-color-light);
-  font-family: monospace;
-  padding-top: 0.25em;
+  color: var(--text-3);
+  font-family: "SF Mono", Monaco, Consolas, monospace;
   text-align: center;
 }
 
@@ -146,20 +488,24 @@ html[data-theme="light"] h3 {
 }
 
 .timeline-title {
-  margin: 0 0 0.25em;
-  font-size: 0.95em;
+  margin: 0 0 0.2em !important;
+  font-size: 0.9em !important;
   font-weight: 600;
   border-bottom: none !important;
 }
 
+.timeline-title::after {
+  display: none !important;
+}
+
 .timeline-title a {
-  color: var(--global-text-color);
-  text-decoration: none;
+  color: var(--text) !important;
+  text-decoration: none !important;
+  transition: color 0.15s;
 }
 
 .timeline-title a:hover {
-  color: var(--global-link-color);
-  text-decoration: none;
+  color: var(--accent) !important;
 }
 
 .timeline-meta {
@@ -167,38 +513,42 @@ html[data-theme="light"] h3 {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.35em;
-  font-size: 0.72em;
-  color: var(--global-text-color-light);
+  font-size: 0.7em;
+  color: var(--text-3);
+  margin-top: 0.15em;
 }
 
 .read-time {
-  margin-right: 0.3em;
+  margin-right: 0.2em;
 }
 
-/* ==========================================================================
-   TAG CHIPS
-   ========================================================================== */
+/* ----------------------------------------------------------------
+   11. TAG CHIPS
+   ---------------------------------------------------------------- */
 
 .tag-chip {
   display: inline-block;
-  padding: 1px 8px;
-  border-radius: 12px;
-  background: var(--global-border-color);
-  color: var(--global-text-color-light);
+  padding: 1px 9px;
+  border-radius: 20px;
+  border: 1px solid var(--border-2);
+  color: var(--text-3) !important;
+  background: transparent;
   text-decoration: none !important;
-  font-size: 0.72em;
+  font-size: 0.7em;
+  font-weight: 500;
   transition: all 0.15s;
   white-space: nowrap;
 }
 
 .tag-chip:hover {
-  background: var(--global-link-color);
-  color: #fff !important;
+  border-color: var(--accent);
+  color: var(--accent) !important;
+  background: var(--accent-dim);
 }
 
-/* ==========================================================================
-   검색 + 태그 필터
-   ========================================================================== */
+/* ----------------------------------------------------------------
+   12. SEARCH BOX & TAG FILTER
+   ---------------------------------------------------------------- */
 
 .search-box {
   margin-bottom: 0.8em;
@@ -206,163 +556,92 @@ html[data-theme="light"] h3 {
 
 .search-box input {
   width: 100%;
-  padding: 0.55em 1em;
-  border: 1px solid var(--global-border-color);
-  border-radius: 4px;
-  background: var(--global-bg-color);
-  color: var(--global-text-color);
-  font-size: 0.9em;
+  padding: 0.65em 1em;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-surface);
+  color: var(--text);
+  font-size: 0.88em;
   box-sizing: border-box;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  outline: none;
 }
 
 .search-box input:focus {
-  outline: none;
-  border-color: var(--global-link-color);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
 }
 
 .tag-filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35em;
+  gap: 0.4em;
   margin-bottom: 1.5em;
 }
 
 .tag-btn {
-  padding: 3px 11px;
-  border: 1px solid var(--global-border-color);
+  padding: 4px 13px;
+  border: 1px solid var(--border-2);
   border-radius: 20px;
   background: transparent;
-  color: var(--global-text-color-light);
+  color: var(--text-3);
   font-size: 0.78em;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.15s;
 }
 
-.tag-btn:hover,
+.tag-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
 .tag-btn.active {
-  background: var(--global-link-color);
-  border-color: var(--global-link-color);
-  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
 }
 
-/* ==========================================================================
-   자동 TOC (목차)
-   ========================================================================== */
-
-.auto-toc {
-  margin-bottom: 1.8em;
-  border: 1px solid var(--global-border-color);
-  border-radius: 4px;
-  font-size: 0.85em;
-  overflow: hidden;
-}
-
-.auto-toc summary {
-  padding: 0.55em 1em;
-  cursor: pointer;
-  font-weight: 600;
-  color: var(--global-text-color-light);
-  user-select: none;
-  background: var(--global-border-color);
-  list-style: none;
-}
-
-.auto-toc summary::-webkit-details-marker {
-  display: none;
-}
-
-.auto-toc summary::before {
-  content: "▸ ";
-  font-size: 0.8em;
-}
-
-.auto-toc[open] summary::before {
-  content: "▾ ";
-}
-
-.auto-toc ul {
-  margin: 0;
-  padding: 0.6em 1em 0.6em 1.8em;
-}
-
-.auto-toc li {
-  margin: 0.2em 0;
-  list-style: disc;
-}
-
-.auto-toc a {
-  color: var(--global-text-color);
-  text-decoration: none;
-}
-
-.auto-toc a:hover {
-  color: var(--global-link-color);
-}
-
-.auto-toc .toc-h3 {
-  margin-left: 1.2em;
-  font-size: 0.92em;
-}
-
-/* ==========================================================================
-   이전/다음 글 버튼
-   ========================================================================== */
-
-.pager-label {
-  display: block;
-  font-size: 0.72em;
-  color: var(--global-text-color-light);
-  margin-bottom: 3px;
-}
-
-.pager-title {
-  display: block;
-  font-size: 0.88em;
-  color: var(--global-text-color);
-  white-space: normal;
-  line-height: 1.4;
-}
-
-.pagination--pager {
-  padding: 0.8em 1.2em !important;
-  text-align: left !important;
-}
-
-.pagination--pager:last-child {
-  text-align: right !important;
-}
-
-/* ==========================================================================
-   홈페이지 랜딩
-   ========================================================================== */
+/* ----------------------------------------------------------------
+   13. HOMEPAGE HERO
+   ---------------------------------------------------------------- */
 
 .home-hero {
-  padding: 2.5em 0 2em;
-  border-bottom: 1px solid var(--global-border-color);
-  margin-bottom: 1.8em;
+  padding: 3em 0 2.5em;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2em;
 }
 
 .home-hero__greeting {
-  margin: 0 0 0.3em;
-  font-size: 1em;
-  color: var(--global-text-color-light);
+  margin: 0 0 0.5em;
+  font-size: 0.85em;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .home-hero__title {
-  margin: 0 0 0.4em;
-  font-size: 2em;
-  font-weight: 700;
-  line-height: 1.2;
-  color: var(--global-text-color);
+  margin: 0 0 0.5em;
+  font-size: 2.4em;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--text);
   border-bottom: none !important;
+}
+
+.home-hero__title::after {
+  display: none !important;
 }
 
 .home-hero__desc {
   margin: 0;
-  font-size: 1em;
-  color: var(--global-text-color-light);
-  line-height: 1.6;
+  font-size: 0.95em;
+  color: var(--text-2);
+  line-height: 1.7;
+  max-width: 480px;
 }
 
 .home-section-header {
@@ -373,70 +652,341 @@ html[data-theme="light"] h3 {
 }
 
 .home-section-title {
-  margin: 0;
-  font-size: 1em;
-  color: var(--global-text-color-light);
+  margin: 0 !important;
+  font-size: 0.72em !important;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color: var(--text-3);
   border-bottom: none !important;
+}
+
+.home-section-title::after {
+  display: none !important;
 }
 
 .home-view-all {
   font-size: 0.82em;
-  color: var(--global-link-color);
+  color: var(--accent);
   text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.15s;
 }
 
 .home-view-all:hover {
-  text-decoration: underline;
+  opacity: 0.75;
 }
 
-/* ==========================================================================
-   검색 페이지
-   ========================================================================== */
+/* ----------------------------------------------------------------
+   14. AUTO TOC
+   ---------------------------------------------------------------- */
+
+.auto-toc {
+  margin-bottom: 2em;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-surface);
+  overflow: hidden;
+  font-size: 0.83em;
+}
+
+.auto-toc summary {
+  padding: 0.65em 1em;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-2);
+  user-select: none;
+  background: var(--bg-elevated);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  transition: background 0.15s;
+}
+
+.auto-toc summary::-webkit-details-marker { display: none; }
+.auto-toc summary::before { content: "▸"; font-size: 0.75em; }
+.auto-toc[open] summary::before { content: "▾"; }
+.auto-toc[open] summary { background: var(--bg-elevated); }
+
+.auto-toc ul {
+  margin: 0;
+  padding: 0.5em 0.8em 0.6em 1.4em;
+  list-style: none;
+}
+
+.auto-toc li {
+  margin: 0.2em 0;
+  position: relative;
+}
+
+.auto-toc li::before {
+  content: "–";
+  position: absolute;
+  left: -1em;
+  color: var(--text-3);
+}
+
+.auto-toc .toc-h3 {
+  margin-left: 1em;
+  font-size: 0.92em;
+}
+
+.auto-toc a {
+  color: var(--text-2);
+  text-decoration: none;
+  transition: color 0.12s;
+}
+
+.auto-toc a:hover {
+  color: var(--accent);
+}
+
+/* ----------------------------------------------------------------
+   15. PREV/NEXT PAGINATION
+   ---------------------------------------------------------------- */
+
+.pagination--pager {
+  padding: 0.9em 1.2em !important;
+  text-align: left !important;
+  border-radius: 8px !important;
+  border-color: var(--border) !important;
+  background: var(--bg-surface) !important;
+  color: var(--text-2) !important;
+  transition: border-color 0.15s, background 0.15s !important;
+}
+
+.pagination--pager:hover {
+  border-color: var(--accent) !important;
+  background: var(--accent-dim) !important;
+  color: var(--accent) !important;
+}
+
+.pagination--pager:last-child {
+  text-align: right !important;
+}
+
+.pagination--pager.disabled {
+  opacity: 0.35;
+}
+
+.pager-label {
+  display: block;
+  font-size: 0.7em;
+  color: var(--text-3);
+  margin-bottom: 4px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.pager-title {
+  display: block;
+  font-size: 0.88em;
+  color: inherit;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+/* ----------------------------------------------------------------
+   16. SEARCH PAGE
+   ---------------------------------------------------------------- */
 
 .search-page .search-box {
   margin-bottom: 1.5em;
 }
 
 .search-result-item {
-  padding: 0.9em 0;
-  border-bottom: 1px solid var(--global-border-color);
+  padding: 1em 0;
+  border-bottom: 1px solid var(--border);
 }
 
-.search-result-item:last-child {
-  border-bottom: none;
-}
+.search-result-item:last-child { border-bottom: none; }
 
 .search-result-item h3 {
-  margin: 0 0 0.2em;
-  font-size: 1em;
+  margin: 0 0 0.25em;
+  font-size: 0.95em;
   border-bottom: none !important;
 }
 
+.search-result-item h3::after { display: none !important; }
+
 .search-result-item h3 a {
-  color: var(--global-text-color);
+  color: var(--text);
   text-decoration: none;
 }
 
 .search-result-item h3 a:hover {
-  color: var(--global-link-color);
+  color: var(--accent);
 }
 
 .search-result-meta {
-  font-size: 0.75em;
-  color: var(--global-text-color-light);
+  font-size: 0.72em;
+  color: var(--text-3);
   margin-bottom: 0.3em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em;
+  align-items: center;
 }
 
 .search-result-excerpt {
   font-size: 0.85em;
-  color: var(--global-text-color-light);
-  line-height: 1.5;
+  color: var(--text-2);
+  line-height: 1.6;
 }
 
 .search-empty {
-  color: var(--global-text-color-light);
-  padding: 2em 0;
+  color: var(--text-3);
+  padding: 3em 0;
   text-align: center;
+  font-size: 0.9em;
 }
+
+/* ----------------------------------------------------------------
+   17. FOOTER
+   ---------------------------------------------------------------- */
+
+html[data-theme="dark"] .page__footer {
+  background: #0a0a0a;
+  border-top: 1px solid var(--border);
+  color: var(--text-3);
+}
+
+html[data-theme="dark"] .page__footer a {
+  color: var(--text-3);
+}
+
+html[data-theme="dark"] .page__footer a:hover {
+  color: var(--accent);
+}
+
+/* ----------------------------------------------------------------
+   18. SCROLLBAR (다크 모드)
+   ---------------------------------------------------------------- */
+
+html[data-theme="dark"] {
+  scrollbar-width: thin;
+  scrollbar-color: #333 #111;
+}
+
+html[data-theme="dark"]::-webkit-scrollbar { width: 6px; height: 6px; }
+html[data-theme="dark"]::-webkit-scrollbar-track { background: #111; }
+html[data-theme="dark"]::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+html[data-theme="dark"]::-webkit-scrollbar-thumb:hover { background: #444; }
+
+/* ----------------------------------------------------------------
+   19. 태그 아카이브 페이지
+   ---------------------------------------------------------------- */
+
+.archive__subtitle {
+  font-size: 0.78em !important;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3) !important;
+  border-bottom-color: var(--border) !important;
+  margin-top: 2em;
+}
+
+/* 태그 페이지 내 포스트 항목 */
+.list__item .archive__item-title {
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+.list__item .archive__item-title a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.list__item .archive__item-title a:hover {
+  color: var(--accent);
+}
+
+.list__item .page__date {
+  font-size: 0.72em;
+  color: var(--text-3);
+}
+
+/* ----------------------------------------------------------------
+   20. MISC
+   ---------------------------------------------------------------- */
+
+/* 포스트 메타 태그 영역 */
+.page__meta .page__taxonomy-item {
+  border-color: var(--border);
+  color: var(--text-2);
+  font-size: 0.78em;
+  border-radius: 20px;
+  transition: all 0.15s;
+}
+
+.page__meta .page__taxonomy-item:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+/* 포스트 헤더 태그 */
+.timeline-meta.page-tags {
+  margin-top: 0.5em;
+}
+
+/* 읽기 시간 */
+.page__meta p {
+  color: var(--text-3);
+  font-size: 0.78em;
+}
+
+/* 공유 버튼 */
+.page__share-title {
+  color: var(--text-3);
+}
+
+/* 관련 포스트 제목 */
+.page__related-title {
+  color: var(--text-3);
+  font-size: 0.72em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* 그리드 관련 포스트 카드 */
+html[data-theme="dark"] .archive__item-title a {
+  color: var(--text);
+}
+
+html[data-theme="dark"] .archive__item-title a:hover {
+  color: var(--accent);
+}
+
+/* 버튼 스타일 */
+html[data-theme="dark"] .btn {
+  background: var(--bg-elevated);
+  color: var(--text);
+  border: 1px solid var(--border-2);
+  border-radius: 6px;
+  transition: all 0.15s;
+}
+
+html[data-theme="dark"] .btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* 공지 박스 */
+html[data-theme="dark"] .notice {
+  background: var(--bg-elevated);
+  border-left-color: var(--accent);
+}
+
+/* 페이지 패딩 */
+.page {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+/* 날짜 표시 */
+.page__date { font-size: 0.78em; }

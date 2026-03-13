@@ -11,9 +11,9 @@ redirect_from:
 {% include base_path %}
 
 <div class="home-hero">
-  <p class="home-hero__greeting">안녕하세요 👋</p>
+  <p class="home-hero__greeting">Game Dev · Graphics · Optimization</p>
   <h1 class="home-hero__title">개발 끄적대기</h1>
-  <p class="home-hero__desc">게임 그래픽스, 렌더링, 최적화에 대해 공부한 것들을 기록합니다.</p>
+  <p class="home-hero__desc">게임 그래픽스, 렌더링, 성능 최적화에 대해 공부한 것들을 기록합니다. 틀릴 수 있고, 배우는 중입니다.</p>
 </div>
 
 <div class="home-section-header">
