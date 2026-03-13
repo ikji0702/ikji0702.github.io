@@ -1,17 +1,53 @@
 ---
 layout: archive
 permalink: /tags/
-title: "Posts by Tags"
+title: "Tags"
 author_profile: true
 ---
 
 {% include base_path %}
 {% include group-by-array collection=site.posts field="tags" %}
 
+<!-- 상단 태그 네비게이션 -->
+<div class="tag-nav">
+  {% assign sorted_tags = group_names | sort %}
+  {% for tag in sorted_tags %}
+    <a href="#{{ tag | slugify }}" class="tag-nav__chip">
+      {{ tag }}
+      <span class="tag-nav__count">{{ group_items[forloop.index0].size }}</span>
+    </a>
+  {% endfor %}
+</div>
+
+<!-- 태그별 포스트 목록 -->
 {% for tag in group_names %}
   {% assign posts = group_items[forloop.index0] %}
-  <h2 id="{{ tag | slugify }}" class="archive__subtitle">{{ tag }}</h2>
-  {% for post in posts %}
-    {% include archive-single.html %}
-  {% endfor %}
+  <div class="tag-section" id="{{ tag | slugify }}">
+    <h2 class="tag-section__title">
+      <span class="tag-section__name">{{ tag }}</span>
+      <span class="tag-section__count">{{ posts.size }}</span>
+    </h2>
+    <div class="timeline">
+      {% for post in posts %}
+        <div class="timeline-item">
+          <div class="timeline-date">{{ post.date | date: "%m.%d" }}</div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">
+              <a href="{{ base_path }}{{ post.url }}">{{ post.title }}</a>
+            </h3>
+            <div class="timeline-meta">
+              {% if post.read_time %}
+                <span class="read-time"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</span>
+              {% endif %}
+              {% for t in post.tags %}
+                {% unless t == tag %}
+                  <a href="#{{ t | slugify }}" class="tag-chip">{{ t }}</a>
+                {% endunless %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 {% endfor %}
