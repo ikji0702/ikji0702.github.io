@@ -41,7 +41,6 @@ layout: default
             <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
           {% endif %}
 
-          <!-- 태그 표시 -->
           {% if page.tags.size > 0 %}
             <div class="timeline-meta" style="margin-top:0.4em">
               {% for tag in page.tags %}
@@ -52,9 +51,9 @@ layout: default
         </header>
       {% endunless %}
 
-      <!-- 자동 목차 (TOC) -->
-      <details class="auto-toc" id="post-toc" open>
-        <summary><i class="fa fa-list" aria-hidden="true"></i> 목차</summary>
+      <!-- 자동 목차 (TOC) - JS로 채워짐 -->
+      <details class="auto-toc" id="post-toc" open style="display:none">
+        <summary>목차</summary>
         <ul id="toc-list"></ul>
       </details>
 
@@ -75,13 +74,8 @@ layout: default
 
       {% include post_pagination.html %}
     </div>
-
-    {% if site.comments.provider and page.comments %}
-      {% include comments.html %}
-    {% endif %}
   </article>
 
-  {% comment %}<!-- only show related on a post page when not disabled -->{% endcomment %}
   {% if page.id and page.related and site.related_posts.size > 0 %}
     <div class="page__related">
       {% if site.data.ui-text[site.locale].related_label %}
@@ -96,22 +90,18 @@ layout: default
   {% endif %}
 </div>
 
-<!-- 자동 TOC 생성 스크립트 -->
 <script>
-(function() {
+document.addEventListener('DOMContentLoaded', function() {
   var content = document.querySelector('.page__content');
   var tocList = document.getElementById('toc-list');
   var toc = document.getElementById('post-toc');
   if (!content || !tocList || !toc) return;
 
   var headings = content.querySelectorAll('h2, h3');
-  if (headings.length < 2) {
-    toc.style.display = 'none';
-    return;
-  }
+  if (headings.length < 1) return;
 
   headings.forEach(function(h, i) {
-    if (!h.id) h.id = 'heading-' + i;
+    if (!h.id) h.id = 'toc-heading-' + i;
     var li = document.createElement('li');
     if (h.tagName === 'H3') li.className = 'toc-h3';
     var a = document.createElement('a');
@@ -120,5 +110,7 @@ layout: default
     li.appendChild(a);
     tocList.appendChild(li);
   });
-})();
+
+  toc.style.display = '';
+});
 </script>

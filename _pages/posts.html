@@ -11,23 +11,12 @@ author_profile: true
   <input type="text" id="post-search" placeholder="포스트 제목 검색..." />
 </div>
 
-{% assign all_tags = "" %}
-{% for post in site.posts %}
-  {% for tag in post.tags %}
-    {% unless all_tags contains tag %}
-      {% assign all_tags = all_tags | append: tag | append: "|||" %}
-    {% endunless %}
-  {% endfor %}
-{% endfor %}
-{% assign tag_list = all_tags | split: "|||" | uniq | sort %}
+{% assign sorted_tags = site.tags | sort %}
 
 <div class="tag-filters">
   <button class="tag-btn active" data-tag="all">전체</button>
-  {% for tag in tag_list %}
-    {% assign trimmed = tag | strip %}
-    {% if trimmed != "" %}
-      <button class="tag-btn" data-tag="{{ trimmed }}">{{ trimmed }}</button>
-    {% endif %}
+  {% for tag in sorted_tags %}
+    <button class="tag-btn" data-tag="{{ tag[0] }}">{{ tag[0] }}</button>
   {% endfor %}
 </div>
 
@@ -43,7 +32,7 @@ author_profile: true
   {% endif %}
 
   <div class="timeline-item"
-       data-tags="{{ post.tags | join: '|||' | downcase }}"
+       data-tags="{{ post.tags | join: '|' | downcase }}"
        data-title="{{ post.title | downcase | escape }}">
     <div class="timeline-date">{{ post.date | date: "%m.%d" }}</div>
     <div class="timeline-content">
@@ -72,25 +61,30 @@ document.addEventListener('DOMContentLoaded', function() {
   var activeTag = 'all';
 
   function filter() {
-    var q = searchInput.value.toLowerCase().trim();
+    var q = (searchInput.value || '').toLowerCase().trim();
+
     items.forEach(function(item) {
       var title = item.getAttribute('data-title') || '';
-      var tags = item.getAttribute('data-tags') || '';
-      var matchSearch = !q || title.includes(q);
-      var matchTag = activeTag === 'all' || tags.split('|||').some(function(t) {
-        return t.trim() === activeTag.toLowerCase();
-      });
+      var rawTags = item.getAttribute('data-tags') || '';
+      var tags = rawTags ? rawTags.split('|') : [];
+
+      var matchSearch = !q || title.indexOf(q) !== -1;
+      var matchTag = activeTag === 'all' || tags.indexOf(activeTag.toLowerCase()) !== -1;
+
       item.style.display = (matchSearch && matchTag) ? '' : 'none';
     });
 
-    // 연도 헤더도 숨기기
+    // 연도 그룹 숨기기
     document.querySelectorAll('.timeline').forEach(function(tl) {
-      var hasVisible = Array.from(tl.querySelectorAll('.timeline-item'))
-        .some(function(i) { return i.style.display !== 'none'; });
+      var hasVisible = false;
+      var children = tl.querySelectorAll('.timeline-item');
+      for (var i = 0; i < children.length; i++) {
+        if (children[i].style.display !== 'none') { hasVisible = true; break; }
+      }
       tl.style.display = hasVisible ? '' : 'none';
-      var header = tl.previousElementSibling;
-      if (header && header.classList.contains('timeline-year')) {
-        header.style.display = hasVisible ? '' : 'none';
+      var prev = tl.previousElementSibling;
+      if (prev && prev.classList.contains('timeline-year')) {
+        prev.style.display = hasVisible ? '' : 'none';
       }
     });
   }

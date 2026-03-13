@@ -16,8 +16,8 @@
             <li class="masthead__menu-item"><a href="{{ domain }}{{ link.url }}">{{ link.title }}</a></li>
           {% endfor %}
           <li id="theme-toggle" class="masthead__menu-item persist tail">
-            <a href="#" onclick="toggleTheme(); return false;" title="테마 전환">
-              <i id="theme-icon" class="fa-solid fa-sun" aria-hidden="true"></i>
+            <a href="#" id="theme-toggle-btn" title="테마 전환">
+              <span id="theme-icon">☀</span>
             </a>
           </li>
         </ul>

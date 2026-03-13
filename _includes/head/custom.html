@@ -8,18 +8,29 @@
   var saved = localStorage.getItem('theme');
   if (saved) document.documentElement.setAttribute('data-theme', saved);
 
+  function updateIcon(theme) {
+    var icon = document.getElementById('theme-icon');
+    if (icon) icon.textContent = theme === 'dark' ? '☀' : '🌙';
+  }
+
   window.toggleTheme = function() {
     var t = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', t);
     localStorage.setItem('theme', t);
-    var icon = document.getElementById('theme-icon');
-    if (icon) icon.className = t === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+    updateIcon(t);
   };
 
   document.addEventListener('DOMContentLoaded', function() {
     var theme = document.documentElement.getAttribute('data-theme') || 'dark';
-    var icon = document.getElementById('theme-icon');
-    if (icon) icon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+    updateIcon(theme);
+
+    var btn = document.getElementById('theme-toggle-btn');
+    if (btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.toggleTheme();
+      });
+    }
   });
 })();
 </script>
