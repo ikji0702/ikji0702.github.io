@@ -1,54 +1,384 @@
-/* 기본 본문 영역 */
-/* Markdown 컨텐트를 감싸는 클래스 (Minima, GitHub Pages 공통) */
-body {
-  /* 본문 기본 색상 (선택 사항) */
-  color: #d0d0d0;
+/* ==========================================================================
+   DARK THEME OVERRIDE
+   _dark.scss 기본 배경(#474747)이 너무 밝아 여기서 진한 다크로 재정의
+   ========================================================================== */
+
+html[data-theme="dark"] {
+  --global-bg-color: #1a1a1a;
+  --global-footer-bg-color: #111111;
+  --global-text-color: #d0d0d0;
+  --global-text-color-light: #888888;
+  --global-border-color: #2e2e2e;
+  --global-code-background-color: #252525;
+  --global-code-text-color: #c9d1d9;
+  --global-link-color: #52adc8;
+  --global-link-color-hover: #3a8ba8;
 }
 
+html[data-theme="dark"] .masthead,
+html[data-theme="dark"] .greedy-nav,
+html[data-theme="dark"] .masthead__menu-item {
+  background-color: #1a1a1a;
+}
+
+html[data-theme="dark"] .hidden-links {
+  background: #242424;
+  border-color: #2e2e2e;
+}
+
+html[data-theme="dark"] .hidden-links::after {
+  border-color: #242424 transparent;
+}
+
+html[data-theme="dark"] .page__footer {
+  background-color: #111111;
+}
+
+/* ==========================================================================
+   TYPOGRAPHY
+   ========================================================================== */
+
 .page {
-  --global-border-color: #2f2f2f;
-  --global-code-background-color: #2f2f2f;
-  padding-left: 4%;
-  padding-right: 4%;
+  padding-left: 2%;
+  padding-right: 2%;
 }
 
 .page__content {
   font-size: 15px;
-  line-height: 2.0;         /* 행간 1.6배 */
+  line-height: 1.9;
+}
+
+.page__content p {
+  margin-bottom: 1em;
+}
+
+.page__content li + li {
+  margin-top: 0.35em;
 }
 
 .page__date {
   font-size: 12px;
 }
 
-/* 문단 간 간격 (p 태그 사이) */
-body p {
-  margin-bottom: 0.1em;     /* 문단 아래 여백 3em */
-}
-
-/* 리스트 항목 간격 */
-body li + li {
-  margin-top: 0.7em;
-}
-
-/* 1) 제목 색상 지정 */
-body h1 {
+/* 다크 테마 제목 색상 */
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4 {
   color: #ffffff;
 }
-body h2 {
-  color: #ffffff;
-}
-body h3 {
-  color: #ffffff;
-}
-/* 필요에 따라 h4, h5, h6 도 추가 가능 */
-body h4 { color: #ffffff; font-size: 14px; }
-body h5 { color: #b1b1b1; }
-body h6 { color: #b1b1b1; }
 
-/* 2) 굵은 텍스트(bold) 색상 지정 */
-/* 마크다운에서 **bold**는 <strong> 또는 <b> 태그로 렌더링됩니다. */
-body strong,
-body b {
-  color: #ffffff!important;  
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 {
+  color: #b1b1b1;
+}
+
+html[data-theme="dark"] strong,
+html[data-theme="dark"] b {
+  color: #ffffff;
+}
+
+/* 다크 테마 코드 블록 */
+html[data-theme="dark"] pre {
+  background: #1e1e1e;
+  border: 1px solid #2e2e2e;
+  border-radius: 4px;
+}
+
+/* 라이트 테마 제목 색상 */
+html[data-theme="light"] h1,
+html[data-theme="light"] h2,
+html[data-theme="light"] h3 {
+  color: #1a1a1a;
+}
+
+/* ==========================================================================
+   TIMELINE 글 목록
+   ========================================================================== */
+
+.timeline-year {
+  margin: 1.8em 0 0.6em;
+  padding-bottom: 0.3em;
+  font-size: 1.1em;
+  color: var(--global-text-color-light);
+  border-bottom: 1px solid var(--global-border-color);
+}
+
+.timeline {
+  position: relative;
+  padding-left: 1em;
+  border-left: 2px solid var(--global-border-color);
+  margin-bottom: 2em;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1em;
+  padding: 0.7em 0.5em;
+  border-bottom: 1px solid var(--global-border-color);
+  border-radius: 4px;
+  transition: background 0.15s, padding-left 0.15s;
+}
+
+.timeline-item:last-child {
+  border-bottom: none;
+}
+
+.timeline-item:hover {
+  background: var(--global-border-color);
+  padding-left: 1em;
+}
+
+.timeline-date {
+  flex-shrink: 0;
+  width: 44px;
+  font-size: 0.72em;
+  color: var(--global-text-color-light);
+  font-family: monospace;
+  padding-top: 0.25em;
+  text-align: center;
+}
+
+.timeline-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.timeline-title {
+  margin: 0 0 0.25em;
+  font-size: 0.95em;
+  font-weight: 600;
+  border-bottom: none !important;
+}
+
+.timeline-title a {
+  color: var(--global-text-color);
+  text-decoration: none;
+}
+
+.timeline-title a:hover {
+  color: var(--global-link-color);
+  text-decoration: none;
+}
+
+.timeline-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35em;
+  font-size: 0.72em;
+  color: var(--global-text-color-light);
+}
+
+.read-time {
+  margin-right: 0.3em;
+}
+
+/* ==========================================================================
+   TAG CHIPS
+   ========================================================================== */
+
+.tag-chip {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 12px;
+  background: var(--global-border-color);
+  color: var(--global-text-color-light);
+  text-decoration: none !important;
+  font-size: 0.72em;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.tag-chip:hover {
+  background: var(--global-link-color);
+  color: #fff !important;
+}
+
+/* ==========================================================================
+   검색 + 태그 필터
+   ========================================================================== */
+
+.search-box {
+  margin-bottom: 0.8em;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.55em 1em;
+  border: 1px solid var(--global-border-color);
+  border-radius: 4px;
+  background: var(--global-bg-color);
+  color: var(--global-text-color);
+  font-size: 0.9em;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: var(--global-link-color);
+}
+
+.tag-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35em;
+  margin-bottom: 1.5em;
+}
+
+.tag-btn {
+  padding: 3px 11px;
+  border: 1px solid var(--global-border-color);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--global-text-color-light);
+  font-size: 0.78em;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.tag-btn:hover,
+.tag-btn.active {
+  background: var(--global-link-color);
+  border-color: var(--global-link-color);
+  color: #fff;
+}
+
+/* ==========================================================================
+   자동 TOC (목차)
+   ========================================================================== */
+
+.auto-toc {
+  margin-bottom: 1.8em;
+  border: 1px solid var(--global-border-color);
+  border-radius: 4px;
+  font-size: 0.85em;
+  overflow: hidden;
+}
+
+.auto-toc summary {
+  padding: 0.55em 1em;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--global-text-color-light);
+  user-select: none;
+  background: var(--global-border-color);
+  list-style: none;
+}
+
+.auto-toc summary::-webkit-details-marker {
+  display: none;
+}
+
+.auto-toc summary::before {
+  content: "▸ ";
+  font-size: 0.8em;
+}
+
+.auto-toc[open] summary::before {
+  content: "▾ ";
+}
+
+.auto-toc ul {
+  margin: 0;
+  padding: 0.6em 1em 0.6em 1.8em;
+}
+
+.auto-toc li {
+  margin: 0.2em 0;
+  list-style: disc;
+}
+
+.auto-toc a {
+  color: var(--global-text-color);
+  text-decoration: none;
+}
+
+.auto-toc a:hover {
+  color: var(--global-link-color);
+}
+
+.auto-toc .toc-h3 {
+  margin-left: 1.2em;
+  font-size: 0.92em;
+}
+
+/* ==========================================================================
+   이전/다음 글 버튼
+   ========================================================================== */
+
+.pager-label {
+  display: block;
+  font-size: 0.72em;
+  color: var(--global-text-color-light);
+  margin-bottom: 3px;
+}
+
+.pager-title {
+  display: block;
+  font-size: 0.88em;
+  color: var(--global-text-color);
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.pagination--pager {
+  padding: 0.8em 1.2em !important;
+  text-align: left !important;
+}
+
+.pagination--pager:last-child {
+  text-align: right !important;
+}
+
+/* ==========================================================================
+   검색 페이지
+   ========================================================================== */
+
+.search-page .search-box {
+  margin-bottom: 1.5em;
+}
+
+.search-result-item {
+  padding: 0.9em 0;
+  border-bottom: 1px solid var(--global-border-color);
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item h3 {
+  margin: 0 0 0.2em;
+  font-size: 1em;
+  border-bottom: none !important;
+}
+
+.search-result-item h3 a {
+  color: var(--global-text-color);
+  text-decoration: none;
+}
+
+.search-result-item h3 a:hover {
+  color: var(--global-link-color);
+}
+
+.search-result-meta {
+  font-size: 0.75em;
+  color: var(--global-text-color-light);
+  margin-bottom: 0.3em;
+}
+
+.search-result-excerpt {
+  font-size: 0.85em;
+  color: var(--global-text-color-light);
+  line-height: 1.5;
+}
+
+.search-empty {
+  color: var(--global-text-color-light);
+  padding: 2em 0;
+  text-align: center;
 }

@@ -1,3 +1,40 @@
 <!-- start custom comments snippet -->
 
+<!--
+  Giscus 댓글 시스템 설정 방법:
+  1. https://github.com/ikji0702/ikji0702.github.io 에서 Settings > Features > Discussions 활성화
+  2. https://giscus.app 접속 후 저장소 정보 입력
+  3. 아래 data-repo-id, data-category-id 값을 giscus.app에서 복사한 값으로 교체
+-->
+<script src="https://giscus.app/client.js"
+  data-repo="ikji0702/ikji0702.github.io"
+  data-repo-id="REPO_ID_HERE"
+  data-category="General"
+  data-category-id="CATEGORY_ID_HERE"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="bottom"
+  data-theme="dark"
+  data-lang="ko"
+  crossorigin="anonymous"
+  async>
+</script>
+
+<script>
+// 테마 토글 시 giscus에도 반영
+document.addEventListener('DOMContentLoaded', function() {
+  new MutationObserver(function() {
+    var theme = document.documentElement.getAttribute('data-theme') || 'dark';
+    var iframe = document.querySelector('iframe.giscus-frame');
+    if (!iframe) return;
+    iframe.contentWindow.postMessage(
+      { giscus: { setConfig: { theme: theme === 'dark' ? 'dark' : 'light' } } },
+      'https://giscus.app'
+    );
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+});
+</script>
+
 <!-- end custom comments snippet -->
