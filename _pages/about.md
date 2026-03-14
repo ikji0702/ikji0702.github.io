@@ -41,3 +41,70 @@ redirect_from:
   </div>
 {% endfor %}
 </div>
+
+<!-- ======================================================
+     포트폴리오 섹션
+     수정 방법:
+       각 portfolio-card 블록을 복사/삭제해 항목을 추가/제거하세요.
+       - portfolio-card__title : 프로젝트 이름
+       - portfolio-card__role  : 담당 역할
+       - portfolio-card__desc  : 한 줄 설명
+       - portfolio-card__tags  : 사용 기술 (tag-chip 클래스 스팬)
+       - portfolio-card__link  : 링크 버튼 (없으면 블록 전체 삭제)
+     ====================================================== -->
+<div class="home-section-header" style="margin-top:3em;">
+  <h2 class="home-section-title">포트폴리오</h2>
+</div>
+
+<div class="portfolio-grid">
+
+  <!-- 카드 1 -->
+  <div class="portfolio-card">
+    <div class="portfolio-card__header">
+      <span class="portfolio-card__title">프로젝트 제목을 입력하세요</span>
+      <span class="portfolio-card__role">Lighting Artist</span>
+    </div>
+    <p class="portfolio-card__desc">
+      프로젝트 한 줄 설명을 여기에 적어주세요. 어떤 게임/앱인지, 어떤 역할을 맡았는지 간략히 기술합니다.
+    </p>
+    <div class="portfolio-card__tags">
+      <span class="tag-chip">Unity</span>
+      <span class="tag-chip">Lighting</span>
+      <span class="tag-chip">HDRP</span>
+    </div>
+    <!-- 링크가 없으면 아래 줄 삭제 -->
+    <!-- <a href="https://example.com" class="portfolio-card__link" target="_blank">자세히 보기 →</a> -->
+  </div>
+
+  <!-- 카드 2 -->
+  <div class="portfolio-card">
+    <div class="portfolio-card__header">
+      <span class="portfolio-card__title">두 번째 프로젝트</span>
+      <span class="portfolio-card__role">TA / Graphics</span>
+    </div>
+    <p class="portfolio-card__desc">
+      두 번째 프로젝트 설명입니다. 간단히 사용 엔진, 주요 작업 내용을 적어주세요.
+    </p>
+    <div class="portfolio-card__tags">
+      <span class="tag-chip">Unreal</span>
+      <span class="tag-chip">Shader</span>
+      <span class="tag-chip">Optimization</span>
+    </div>
+  </div>
+
+  <!-- 카드 3 (필요 없으면 삭제) -->
+  <div class="portfolio-card">
+    <div class="portfolio-card__header">
+      <span class="portfolio-card__title">세 번째 프로젝트</span>
+      <span class="portfolio-card__role">Technical Artist</span>
+    </div>
+    <p class="portfolio-card__desc">
+      세 번째 프로젝트 설명입니다.
+    </p>
+    <div class="portfolio-card__tags">
+      <span class="tag-chip">Maya</span>
+      <span class="tag-chip">Substance</span>
+    </div>
+  </div>
+
+</div>

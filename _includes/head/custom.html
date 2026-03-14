@@ -2,22 +2,11 @@
 
 <!-- start custom head snippets -->
 
-<!-- Theme: localStorage 즉시 적용, select 드롭다운으로 모드 전환 -->
+<!-- Theme: localStorage에 저장된 테마를 즉시 적용 -->
 <script>
 (function() {
   var saved = localStorage.getItem('theme') || 'light';
   document.documentElement.setAttribute('data-theme', saved);
-
-  document.addEventListener('DOMContentLoaded', function() {
-    var sel = document.getElementById('theme-select');
-    if (!sel) return;
-    sel.value = localStorage.getItem('theme') || 'light';
-    sel.addEventListener('change', function() {
-      var t = this.value;
-      document.documentElement.setAttribute('data-theme', t);
-      localStorage.setItem('theme', t);
-    });
-  });
 })();
 </script>
 

@@ -11,15 +11,6 @@ author_profile: true
   <input type="text" id="post-search" placeholder="포스트 제목 검색..." />
 </div>
 
-{% assign sorted_tags = site.tags | sort %}
-
-<div class="tag-filters">
-  <button class="tag-btn active" data-tag="all">전체</button>
-  {% for tag in sorted_tags %}
-    <button class="tag-btn" data-tag="{{ tag[0] }}">{{ tag[0] }}</button>
-  {% endfor %}
-</div>
-
 <div id="posts-container">
 {% capture written_year %}'None'{% endcapture %}
 {% for post in site.posts %}
@@ -56,31 +47,20 @@ author_profile: true
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   var searchInput = document.getElementById('post-search');
-  var tagBtns = document.querySelectorAll('.tag-btn');
   var items = document.querySelectorAll('.timeline-item');
-  var activeTag = 'all';
 
   function filter() {
     var q = (searchInput.value || '').toLowerCase().trim();
-
     items.forEach(function(item) {
       var title = item.getAttribute('data-title') || '';
-      var rawTags = item.getAttribute('data-tags') || '';
-      var tags = rawTags ? rawTags.split('|') : [];
-
-      var matchSearch = !q || title.indexOf(q) !== -1;
-      var matchTag = activeTag === 'all' || tags.indexOf(activeTag.toLowerCase()) !== -1;
-
-      item.style.display = (matchSearch && matchTag) ? '' : 'none';
+      item.style.display = (!q || title.indexOf(q) !== -1) ? '' : 'none';
     });
 
-    // 연도 그룹 숨기기
     document.querySelectorAll('.timeline').forEach(function(tl) {
-      var hasVisible = false;
-      var children = tl.querySelectorAll('.timeline-item');
-      for (var i = 0; i < children.length; i++) {
-        if (children[i].style.display !== 'none') { hasVisible = true; break; }
-      }
+      var hasVisible = Array.prototype.some.call(
+        tl.querySelectorAll('.timeline-item'),
+        function(c) { return c.style.display !== 'none'; }
+      );
       tl.style.display = hasVisible ? '' : 'none';
       var prev = tl.previousElementSibling;
       if (prev && prev.classList.contains('timeline-year')) {
@@ -90,14 +70,5 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   searchInput.addEventListener('input', filter);
-
-  tagBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      tagBtns.forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      activeTag = btn.getAttribute('data-tag');
-      filter();
-    });
-  });
 });
 </script>

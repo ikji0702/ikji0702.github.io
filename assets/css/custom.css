@@ -61,36 +61,19 @@ html[data-theme="dark"] {
 }
 
 /* ----------------------------------------------------------------
-   2. 테마 셀렉트 드롭다운
+   2. 읽기 진행 바
    ---------------------------------------------------------------- */
 
-#theme-select {
-  background: transparent;
-  border: 1px solid var(--border-2);
-  border-radius: 20px;
-  color: var(--text-3);
-  font-size: 0.78em;
-  font-weight: 500;
-  padding: 3px 8px;
-  cursor: pointer;
-  outline: none;
-  transition: border-color 0.15s, color 0.15s;
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-#theme-select:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-html[data-theme="dark"] #theme-select {
-  background: var(--bg-elevated);
-  color: var(--text-2);
-}
-
-html[data-theme="dark"] #theme-select option {
-  background: var(--bg-elevated);
+#reading-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--accent);
+  z-index: 9999;
+  transition: width 0.08s linear;
+  border-radius: 0 2px 2px 0;
 }
 
 /* ----------------------------------------------------------------
@@ -144,16 +127,13 @@ html[data-theme="light"] .masthead {
   height: 2px;
 }
 
-/* 테마 셀렉트 래퍼 */
-#theme-toggle {
-  display: flex;
-  align-items: center;
-}
-
 /* 숨김 드롭다운 메뉴 */
+.greedy-nav .hidden-links {
+  background: var(--bg-surface);
+  border-color: var(--border);
+}
 html[data-theme="dark"] .greedy-nav .hidden-links {
   background: #1c1c1c;
-  border-color: var(--border);
 }
 html[data-theme="dark"] .greedy-nav .hidden-links a {
   color: var(--text) !important;
@@ -1078,3 +1058,123 @@ html[data-theme="dark"] .notice {
 
 /* 날짜 표시 */
 .page__date { font-size: 0.78em; }
+
+/* ----------------------------------------------------------------
+   21. 저자 이름 중앙 정렬
+   ---------------------------------------------------------------- */
+
+.author__content {
+  text-align: center !important;
+}
+
+.author__name {
+  text-align: center !important;
+}
+
+.author__bio {
+  text-align: center !important;
+}
+
+/* ----------------------------------------------------------------
+   22. 검색 페이지 흰색 블록 수정
+   ---------------------------------------------------------------- */
+
+/* nav hidden-links (light mode) */
+.greedy-nav .hidden-links {
+  background: var(--bg-surface);
+}
+
+/* toc widget (hardcoded #fff 오버라이드) */
+.toc {
+  background: var(--bg-surface) !important;
+}
+
+html[data-theme="dark"] .toc {
+  background: var(--bg-elevated) !important;
+}
+
+/* 검색 페이지 안의 여백 블록 */
+.search-page {
+  background: transparent;
+}
+
+/* ----------------------------------------------------------------
+   23. 포트폴리오 카드
+   ---------------------------------------------------------------- */
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1em;
+  margin-top: 0.8em;
+  margin-bottom: 2.5em;
+}
+
+.portfolio-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.2em 1.4em;
+  background: var(--bg-surface);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.portfolio-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 20px var(--shadow);
+}
+
+.portfolio-card__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5em;
+  margin-bottom: 0.5em;
+  flex-wrap: wrap;
+}
+
+.portfolio-card__title {
+  font-size: 0.95em;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.portfolio-card__role {
+  font-size: 0.72em;
+  color: var(--accent);
+  font-weight: 500;
+  background: var(--accent-dim);
+  border-radius: 20px;
+  padding: 2px 9px;
+  white-space: nowrap;
+}
+
+.portfolio-card__desc {
+  font-size: 0.83em;
+  color: var(--text-2);
+  line-height: 1.65;
+  margin: 0 0 0.8em;
+}
+
+.portfolio-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35em;
+  margin-bottom: 0.7em;
+}
+
+.portfolio-card__link {
+  display: inline-block;
+  font-size: 0.78em;
+  color: var(--accent) !important;
+  text-decoration: none !important;
+  font-weight: 500;
+  transition: opacity 0.15s;
+}
+
+.portfolio-card__link:hover {
+  opacity: 0.75;
+}
+
+html[data-theme="dark"] .portfolio-card {
+  background: var(--bg-elevated);
+}

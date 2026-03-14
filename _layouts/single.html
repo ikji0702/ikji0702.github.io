@@ -4,6 +4,9 @@ layout: default
 
 {% include base_path %}
 
+<!-- 읽기 진행 바 -->
+<div id="reading-progress-bar"></div>
+
 {% if page.header.overlay_color or page.header.overlay_image or page.header.image %}
   {% include page__hero.html %}
 {% endif %}
@@ -101,4 +104,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
   toc.style.display = '';
 });
+</script>
+
+<script>
+(function() {
+  var bar = document.getElementById('reading-progress-bar');
+  if (!bar) return;
+  function updateBar() {
+    var el = document.documentElement;
+    var scrollTop = el.scrollTop || document.body.scrollTop;
+    var scrollHeight = el.scrollHeight - el.clientHeight;
+    bar.style.width = (scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', updateBar, { passive: true });
+  updateBar();
+})();
 </script>
