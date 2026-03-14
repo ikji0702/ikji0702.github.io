@@ -61,17 +61,37 @@ html[data-theme="dark"] {
 }
 
 /* ----------------------------------------------------------------
-   2. 테마 토글 아이콘 (CSS로 처리 — JS 타이밍 무관)
+   2. 테마 셀렉트 드롭다운
    ---------------------------------------------------------------- */
 
-#theme-icon::before {
-  font-style: normal;
-  font-size: 1em;
-  line-height: 1;
+#theme-select {
+  background: transparent;
+  border: 1px solid var(--border-2);
+  border-radius: 20px;
+  color: var(--text-3);
+  font-size: 0.78em;
+  font-weight: 500;
+  padding: 3px 8px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s, color 0.15s;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
-html[data-theme="dark"]  #theme-icon::before { content: "☀"; }
-html[data-theme="light"] #theme-icon::before { content: "🌙"; }
+#theme-select:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+html[data-theme="dark"] #theme-select {
+  background: var(--bg-elevated);
+  color: var(--text-2);
+}
+
+html[data-theme="dark"] #theme-select option {
+  background: var(--bg-elevated);
+}
 
 /* ----------------------------------------------------------------
    3. MASTHEAD (네비게이션 바)
@@ -124,17 +144,10 @@ html[data-theme="light"] .masthead {
   height: 2px;
 }
 
-/* 토글 버튼 */
-#theme-toggle a {
-  color: var(--text-3) !important;
-  font-size: 1em;
-  transition: color 0.15s;
-}
-#theme-toggle a:hover {
-  color: var(--accent) !important;
-}
-#theme-toggle a::before {
-  display: none !important;
+/* 테마 셀렉트 래퍼 */
+#theme-toggle {
+  display: flex;
+  align-items: center;
 }
 
 /* 숨김 드롭다운 메뉴 */

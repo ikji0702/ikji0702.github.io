@@ -2,23 +2,22 @@
 
 <!-- start custom head snippets -->
 
-<!-- Theme: localStorage 즉시 적용. 아이콘은 CSS content로 처리 (JS 타이밍 문제 없음) -->
+<!-- Theme: localStorage 즉시 적용, select 드롭다운으로 모드 전환 -->
 <script>
 (function() {
-  var saved = localStorage.getItem('theme');
-  if (saved) document.documentElement.setAttribute('data-theme', saved);
+  var saved = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', saved);
 
-  window.toggleTheme = function() {
-    var t = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', t);
-    localStorage.setItem('theme', t);
-  };
-
-  /* 이벤트 위임: 캡처 단계에서 처리 (greedy-nav 간섭 방지) */
-  document.addEventListener('click', function(e) {
-    var btn = e.target.closest ? e.target.closest('#theme-toggle-btn') : null;
-    if (btn) { e.preventDefault(); window.toggleTheme(); }
-  }, true);
+  document.addEventListener('DOMContentLoaded', function() {
+    var sel = document.getElementById('theme-select');
+    if (!sel) return;
+    sel.value = localStorage.getItem('theme') || 'light';
+    sel.addEventListener('change', function() {
+      var t = this.value;
+      document.documentElement.setAttribute('data-theme', t);
+      localStorage.setItem('theme', t);
+    });
+  });
 })();
 </script>
 
