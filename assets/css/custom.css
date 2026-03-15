@@ -1060,19 +1060,19 @@ html[data-theme="dark"] .notice {
 .page__date { font-size: 0.78em; }
 
 /* ----------------------------------------------------------------
-   21. 저자 이름 중앙 정렬
+   21. 저자 이름 왼쪽 정렬
    ---------------------------------------------------------------- */
 
 .author__content {
-  text-align: center !important;
+  text-align: left !important;
 }
 
 .author__name {
-  text-align: center !important;
+  text-align: left !important;
 }
 
 .author__bio {
-  text-align: center !important;
+  text-align: left !important;
 }
 
 /* ----------------------------------------------------------------
@@ -1177,4 +1177,345 @@ html[data-theme="dark"] .toc {
 
 html[data-theme="dark"] .portfolio-card {
   background: var(--bg-elevated);
+}
+
+/* ----------------------------------------------------------------
+   24. THEME TOGGLE BUTTON
+   ---------------------------------------------------------------- */
+
+.masthead__inner-wrap {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.masthead__menu {
+  flex: 1;
+  min-width: 0;
+}
+
+#theme-toggle {
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-2);
+  cursor: pointer;
+  padding: 5px 9px;
+  font-size: 0.85em;
+  line-height: 1;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  margin-left: 0.6em;
+  margin-right: 0.4em;
+}
+
+#theme-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+/* ----------------------------------------------------------------
+   25. NAV TOOLTIP
+   ---------------------------------------------------------------- */
+
+.masthead__menu-item.has-tooltip {
+  position: relative;
+}
+
+.nav-tooltip {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-elevated);
+  color: var(--text-2);
+  font-size: 0.7em;
+  padding: 3px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 200;
+}
+
+.masthead__menu-item.has-tooltip:hover .nav-tooltip {
+  opacity: 1;
+}
+
+/* ----------------------------------------------------------------
+   26. TIPS 카드 목록 페이지
+   ---------------------------------------------------------------- */
+
+.tips-header {
+  padding: 2.5em 0 1.5em;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2em;
+}
+
+.tips-page-title {
+  margin: 0 0 0.3em !important;
+  font-size: 1.8em !important;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  border-bottom: none !important;
+}
+
+.tips-page-title::after {
+  display: none !important;
+}
+
+.tips-page-desc {
+  margin: 0;
+  font-size: 0.9em;
+  color: var(--text-2);
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1em;
+  margin-top: 0.5em;
+}
+
+.tip-card {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.2em 1.4em;
+  background: var(--bg-surface);
+  text-decoration: none !important;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.tip-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 16px var(--shadow);
+}
+
+.tip-card__date {
+  font-size: 0.7em;
+  color: var(--text-3);
+  font-family: "SF Mono", Monaco, Consolas, monospace;
+  margin-bottom: 0.4em;
+}
+
+.tip-card__title {
+  margin: 0 0 0.5em !important;
+  font-size: 0.95em !important;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.4;
+  border-bottom: none !important;
+  transition: color 0.15s;
+}
+
+.tip-card__title::after {
+  display: none !important;
+}
+
+.tip-card:hover .tip-card__title {
+  color: var(--accent);
+}
+
+.tip-card__excerpt {
+  margin: 0 0 0.7em;
+  font-size: 0.82em;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+.tip-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35em;
+}
+
+.tips-empty {
+  color: var(--text-3);
+  font-size: 0.9em;
+  padding: 3em 0;
+  text-align: center;
+}
+
+html[data-theme="dark"] .tip-card {
+  background: var(--bg-elevated);
+}
+
+html[data-theme="dark"] .tip-card:hover {
+  background: #222;
+}
+
+/* ----------------------------------------------------------------
+   27. TIP 단일 페이지
+   ---------------------------------------------------------------- */
+
+.tip-page {
+  max-width: 700px;
+  margin: 2em auto 4em;
+  padding: 0 1.5em;
+}
+
+.tip-header {
+  padding-bottom: 1.5em;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2em;
+}
+
+.tip-category-badge {
+  display: inline-block;
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border-radius: 4px;
+  padding: 2px 8px;
+  margin-bottom: 0.8em;
+}
+
+.tip-title {
+  margin: 0 0 0.5em !important;
+  font-size: 1.6em !important;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  color: var(--text);
+  border-bottom: none !important;
+}
+
+.tip-title::after {
+  display: none !important;
+}
+
+.tip-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 0.78em;
+  color: var(--text-3);
+}
+
+.tip-body {
+  font-size: 15px;
+  line-height: 1.95;
+  color: var(--text);
+}
+
+.tip-footer {
+  margin-top: 3em;
+  padding-top: 1.5em;
+  border-top: 1px solid var(--border);
+}
+
+.tip-back {
+  font-size: 0.85em;
+  color: var(--text-2);
+  text-decoration: none !important;
+  transition: color 0.15s;
+}
+
+.tip-back:hover {
+  color: var(--accent);
+}
+
+/* ----------------------------------------------------------------
+   28. RESPONSIVE IMPROVEMENTS (가로 축소 대응)
+   ---------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+video {
+  max-width: 100%;
+}
+
+/* 768px 이하 */
+@media (max-width: 768px) {
+  .home-hero__title {
+    font-size: 1.9em !important;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+
+  .tips-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+
+  #theme-toggle {
+    padding: 4px 8px;
+    font-size: 0.78em;
+  }
+
+  .tip-page {
+    padding: 0 1em;
+    margin-top: 1.5em;
+  }
+}
+
+/* 600px 이하 */
+@media (max-width: 600px) {
+  .home-hero {
+    padding: 1.8em 0 1.2em;
+  }
+
+  .home-hero__title {
+    font-size: 1.6em !important;
+  }
+
+  .home-hero__desc {
+    font-size: 0.88em;
+    max-width: 100%;
+  }
+
+  .page {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tips-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-date {
+    display: none;
+  }
+
+  .tip-page {
+    padding: 0 0.5em;
+    margin-top: 1em;
+  }
+
+  .tip-title {
+    font-size: 1.35em !important;
+  }
+}
+
+/* 480px 이하 */
+@media (max-width: 480px) {
+  .masthead__menu-item--lg a {
+    font-size: 0.9em !important;
+  }
+
+  .page__title {
+    font-size: 1.4em !important;
+  }
+
+  .auto-toc {
+    font-size: 0.78em;
+  }
 }

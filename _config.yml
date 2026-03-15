@@ -227,6 +227,9 @@ collections:
   talks:
     output: true
     permalink: /:collection/:path/
+  tips:
+    output: true
+    permalink: /:collection/:path/
 
 
 # These settings control how pages and collections are included in the site
@@ -256,6 +259,13 @@ defaults:
       author_profile: true
       comments: true
       share: true
+  # _tips
+  - scope:
+      path: ""
+      type: tips
+    values:
+      layout: tip
+      author_profile: false
   # _pages
   - scope:
       path: ""

@@ -1,0 +1,37 @@
+---
+permalink: /tips/
+layout: archive
+title: ""
+author_profile: true
+---
+
+{% include base_path %}
+
+<div class="tips-header">
+  <h1 class="tips-page-title">Tips</h1>
+  <p class="tips-page-desc">짧고 핵심적인 지식 공유 — 툴, 개념, 삽질 기록</p>
+</div>
+
+{% if site.tips.size > 0 %}
+  <div class="tips-grid">
+    {% assign sorted_tips = site.tips | sort: "date" | reverse %}
+    {% for tip in sorted_tips %}
+      <a href="{{ base_path }}{{ tip.url }}" class="tip-card">
+        <div class="tip-card__date">{{ tip.date | date: "%Y.%m.%d" }}</div>
+        <h3 class="tip-card__title">{{ tip.title }}</h3>
+        {% if tip.excerpt %}
+          <p class="tip-card__excerpt">{{ tip.excerpt | strip_html | truncate: 100 }}</p>
+        {% endif %}
+        {% if tip.tags.size > 0 %}
+          <div class="tip-card__tags">
+            {% for tag in tip.tags %}
+              <span class="tag-chip">{{ tag }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </a>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="tips-empty">아직 작성된 Tips가 없습니다.</p>
+{% endif %}

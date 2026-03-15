@@ -13,11 +13,17 @@
             {% else %}
               {% assign domain = base_path %}
             {% endif %}
-            <li class="masthead__menu-item"><a href="{{ domain }}{{ link.url }}">{{ link.title }}</a></li>
+            <li class="masthead__menu-item{% if link.tooltip %} has-tooltip{% endif %}">
+              <a href="{{ domain }}{{ link.url }}">{{ link.title }}</a>
+              {% if link.tooltip %}<span class="nav-tooltip">{{ link.tooltip }}</span>{% endif %}
+            </li>
           {% endfor %}
         </ul>
         <ul class="hidden-links hidden"></ul>
       </nav>
     </div>
+    <button id="theme-toggle" aria-label="테마 전환">
+      <i class="fa fa-moon" id="theme-icon"></i>
+    </button>
   </div>
 </div>

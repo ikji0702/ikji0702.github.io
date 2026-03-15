@@ -16,13 +16,27 @@ redirect_from:
   <p class="home-hero__desc">게임 그래픽스, 렌더링, 성능 최적화에 대해 공부한 것들을 기록합니다. 틀릴 수 있고, 배우는 중입니다.</p>
 </div>
 
+<!-- ======================================================
+     추천 글 섹션
+     추천 글 설정 방법:
+       원하는 포스트의 front matter (---로 시작하는 상단 메타 정보)에
+       아래 한 줄을 추가하면 이 섹션에 자동으로 표시됩니다:
+         featured: true
+       최대 3개가 표시되며, 날짜 역순으로 정렬됩니다.
+       featured: true 인 글이 없으면 최신 글 3개가 대신 표시됩니다.
+     ====================================================== -->
+{% assign featured_posts = site.posts | where: "featured", true | limit: 3 %}
+{% if featured_posts.size == 0 %}
+  {% assign featured_posts = site.posts | limit: 3 %}
+{% endif %}
+
 <div class="home-section-header">
-  <h2 class="home-section-title">최근 글</h2>
+  <h2 class="home-section-title">추천 글</h2>
   <a href="{{ base_path }}/posts/" class="home-view-all">모든 글 보기 →</a>
 </div>
 
 <div class="timeline">
-{% for post in site.posts limit:5 %}
+{% for post in featured_posts %}
   <div class="timeline-item">
     <div class="timeline-date">{{ post.date | date: "%m.%d" }}</div>
     <div class="timeline-content">

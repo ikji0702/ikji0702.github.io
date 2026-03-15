@@ -4,6 +4,10 @@ main:
   - title: "Study"
     url: /posts/
 
+  - title: "Tips"
+    url: /tips/
+    tooltip: "지식 공유"
+
   - title: "Tags"
     url: /tags/
 
