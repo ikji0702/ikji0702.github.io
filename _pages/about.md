@@ -75,50 +75,15 @@ redirect_from:
   <!-- 카드 1 -->
   <div class="portfolio-card">
     <div class="portfolio-card__header">
-      <span class="portfolio-card__title">프로젝트 제목을 입력하세요</span>
-      <span class="portfolio-card__role">Lighting Artist</span>
+      <span class="portfolio-card__title">하늘섬 Skyisland</span>
+      <span class="portfolio-card__role">AD / PM / Lighting Artist </span>
     </div>
     <p class="portfolio-card__desc">
-      프로젝트 한 줄 설명을 여기에 적어주세요. 어떤 게임/앱인지, 어떤 역할을 맡았는지 간략히 기술합니다.
+      게임 '하늘섬'은 2022년 청강문화산업대학교 졸업작품으로 개발한 액션 어드벤처 게임입니다. 하늘섬이라는 그래픽 컨셉과 단기간에 높은 완성도를 보여준 작품이라는 점에서 큰 관심을 받았습니다. Steam에서 무료로 플레이 가능합니다.
     </p>
     <div class="portfolio-card__tags">
-      <span class="tag-chip">Unity</span>
-      <span class="tag-chip">Lighting</span>
-      <span class="tag-chip">HDRP</span>
+      <span class="tag-chip">Unity URP</span>
+      <span class="tag-chip">Student Project</span>
     </div>
-    <!-- 링크가 없으면 아래 줄 삭제 -->
-    <!-- <a href="https://example.com" class="portfolio-card__link" target="_blank">자세히 보기 →</a> -->
+    <a href="hhttps://store.steampowered.com/app/2302640/SkyIsland/" class="portfolio-card__link" target="_blank">자세히 보기 →</a>
   </div>
-
-  <!-- 카드 2 -->
-  <div class="portfolio-card">
-    <div class="portfolio-card__header">
-      <span class="portfolio-card__title">두 번째 프로젝트</span>
-      <span class="portfolio-card__role">TA / Graphics</span>
-    </div>
-    <p class="portfolio-card__desc">
-      두 번째 프로젝트 설명입니다. 간단히 사용 엔진, 주요 작업 내용을 적어주세요.
-    </p>
-    <div class="portfolio-card__tags">
-      <span class="tag-chip">Unreal</span>
-      <span class="tag-chip">Shader</span>
-      <span class="tag-chip">Optimization</span>
-    </div>
-  </div>
-
-  <!-- 카드 3 (필요 없으면 삭제) -->
-  <div class="portfolio-card">
-    <div class="portfolio-card__header">
-      <span class="portfolio-card__title">세 번째 프로젝트</span>
-      <span class="portfolio-card__role">Technical Artist</span>
-    </div>
-    <p class="portfolio-card__desc">
-      세 번째 프로젝트 설명입니다.
-    </p>
-    <div class="portfolio-card__tags">
-      <span class="tag-chip">Maya</span>
-      <span class="tag-chip">Substance</span>
-    </div>
-  </div>
-
-</div>
