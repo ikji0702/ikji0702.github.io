@@ -3,6 +3,7 @@
 main:
   - title: "Study"
     url: /posts/
+    tooltip: "개인 공부"
 
   - title: "Tips"
     url: /tips/
