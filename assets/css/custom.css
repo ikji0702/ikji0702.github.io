@@ -204,8 +204,12 @@ html[data-theme="dark"] .greedy-nav .hidden-links::after {
    5. MAIN CONTENT LAYOUT
    ---------------------------------------------------------------- */
 
-body {
+html {
   background-color: var(--bg);
+}
+
+body {
+  background-color: var(--bg) !important;
   color: var(--text);
 }
 
@@ -840,6 +844,22 @@ html[data-theme="dark"] .page__content tr:hover td {
    17. FOOTER
    ---------------------------------------------------------------- */
 
+/* 라이트 모드 footer — body 배경과 동일하게 통일 */
+html:not([data-theme="dark"]) .page__footer {
+  background: var(--bg) !important;
+  border-top: 1px solid var(--border) !important;
+  color: var(--text-3) !important;
+}
+
+html:not([data-theme="dark"]) .page__footer a {
+  color: var(--text-3);
+}
+
+html:not([data-theme="dark"]) .page__footer a:hover {
+  color: var(--accent);
+}
+
+/* 다크 모드 footer */
 html[data-theme="dark"] .page__footer {
   background: #0a0a0a;
   border-top: 1px solid var(--border);
@@ -1426,6 +1446,19 @@ html[data-theme="dark"] .tip-card:hover {
 /* ----------------------------------------------------------------
    28. RESPONSIVE IMPROVEMENTS (가로 축소 대응)
    ---------------------------------------------------------------- */
+
+/*
+ * 925px ~ 1279px 구간 (large ~ x-large):
+ * Susy 컨테이너가 925px로 고정되어 prefix(0.5/12)≈39px 밖에 안 됨.
+ * 1400px대(컨테이너 1280px, prefix≈53px)와 비슷한 체감 여백이 되도록
+ * padding-left를 늘려 좌측 구분선과 콘텐츠 사이에 여유를 확보.
+ */
+@media (min-width: 925px) and (max-width: 1279px) {
+  .page,
+  .archive {
+    padding-left: 3.5em !important;
+  }
+}
 
 *,
 *::before,
