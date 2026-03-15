@@ -58,13 +58,41 @@ redirect_from:
 
 <!-- ======================================================
      포트폴리오 섹션
-     수정 방법:
-       각 portfolio-card 블록을 복사/삭제해 항목을 추가/제거하세요.
-       - portfolio-card__title : 프로젝트 이름
-       - portfolio-card__role  : 담당 역할
-       - portfolio-card__desc  : 한 줄 설명
-       - portfolio-card__tags  : 사용 기술 (tag-chip 클래스 스팬)
-       - portfolio-card__link  : 링크 버튼 (없으면 블록 전체 삭제)
+     ──────────────────────────────────────────────────────
+     ▶ 기본 카드 (이미지 없음):
+       <div class="portfolio-card">
+         <div class="portfolio-card__header">
+           <span class="portfolio-card__title">이름</span>
+           <span class="portfolio-card__role">역할</span>
+         </div>
+         <p class="portfolio-card__desc">설명</p>
+         <div class="portfolio-card__tags">
+           <span class="tag-chip">Unity</span>
+         </div>
+         <!-- 링크가 있으면: -->
+         <!-- <a href="URL" class="portfolio-card__link">자세히 보기 →</a> -->
+       </div>
+
+     ▶ 이미지 있는 카드:
+       1. /images/ 폴더에 이미지 파일 업로드
+       2. 아래 구조 사용 (has-image 클래스 + __body 래퍼 필요)
+
+       <div class="portfolio-card has-image">
+         <div class="portfolio-card__body">
+           <div class="portfolio-card__header">
+             <span class="portfolio-card__title">이름</span>
+             <span class="portfolio-card__role">역할</span>
+           </div>
+           <p class="portfolio-card__desc">설명</p>
+           <div class="portfolio-card__tags">
+             <span class="tag-chip">Unity</span>
+           </div>
+           <!-- <a href="URL" class="portfolio-card__link">자세히 보기 →</a> -->
+         </div>
+         <div class="portfolio-card__image">
+           <img src="/images/파일명.jpg" alt="프로젝트명">
+         </div>
+       </div>
      ====================================================== -->
 <div class="home-section-header" style="margin-top:3em;">
   <h2 class="home-section-title">포트폴리오</h2>

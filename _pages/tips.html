@@ -1,37 +1,145 @@
 ---
 permalink: /tips/
-layout: archive
+layout: default
 title: ""
-author_profile: true
 ---
 
 {% include base_path %}
 
-<div class="tips-header">
-  <h1 class="tips-page-title">Tips</h1>
-  <p class="tips-page-desc">짧고 핵심적인 지식 공유 — 툴, 개념, 삽질 기록</p>
+<div id="main" role="main" class="tips-main">
+  <div class="tips-layout" id="tips-layout">
+
+    <!-- ── 왼쪽: Tips 목록 ── -->
+    <div class="tips-list-panel" id="tips-list-panel">
+      <div class="tips-header">
+        <h1 class="tips-page-title">Tips</h1>
+        <p class="tips-page-desc">짧고 핵심적인 지식 공유 — 툴, 개념, 삽질 기록</p>
+      </div>
+
+      {% if site.tips.size > 0 %}
+        {% assign sorted_tips = site.tips | sort: "date" | reverse %}
+        <div class="tips-grid" id="tips-grid">
+          {% for tip in sorted_tips %}
+            <a href="{{ base_path }}{{ tip.url }}" class="tip-card" data-url="{{ base_path }}{{ tip.url }}">
+              <div class="tip-card__date">{{ tip.date | date: "%Y.%m.%d" }}</div>
+              <h3 class="tip-card__title">{{ tip.title }}</h3>
+              {% if tip.excerpt %}
+                <p class="tip-card__excerpt">{{ tip.excerpt | strip_html | truncate: 100 }}</p>
+              {% endif %}
+              {% if tip.tags.size > 0 %}
+                <div class="tip-card__tags">
+                  {% for tag in tip.tags %}
+                    <span class="tag-chip">{{ tag }}</span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </a>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="tips-empty">아직 작성된 Tips가 없습니다.</p>
+      {% endif %}
+    </div>
+
+    <!-- ── 오른쪽: Side Peek 패널 ── -->
+    <div class="tips-peek-panel" id="tips-peek-panel">
+      <div class="tips-peek-toolbar">
+        <a href="#" class="tips-peek-btn" id="tips-peek-open-btn" target="_blank" title="새 탭에서 열기">
+          <i class="fa fa-external-link" aria-hidden="true"></i> 새 탭
+        </a>
+        <button class="tips-peek-btn" id="tips-peek-close" aria-label="닫기" title="닫기 (Esc)">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="tips-peek-content" id="tips-peek-content">
+        <div class="tips-peek-placeholder">
+          <div class="tips-peek-placeholder__arrow">←</div>
+          <p>목록에서 Tip을 선택하면<br>여기에 표시됩니다.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
 
-{% if site.tips.size > 0 %}
-  <div class="tips-grid">
-    {% assign sorted_tips = site.tips | sort: "date" | reverse %}
-    {% for tip in sorted_tips %}
-      <a href="{{ base_path }}{{ tip.url }}" class="tip-card">
-        <div class="tip-card__date">{{ tip.date | date: "%Y.%m.%d" }}</div>
-        <h3 class="tip-card__title">{{ tip.title }}</h3>
-        {% if tip.excerpt %}
-          <p class="tip-card__excerpt">{{ tip.excerpt | strip_html | truncate: 100 }}</p>
-        {% endif %}
-        {% if tip.tags.size > 0 %}
-          <div class="tip-card__tags">
-            {% for tag in tip.tags %}
-              <span class="tag-chip">{{ tag }}</span>
-            {% endfor %}
-          </div>
-        {% endif %}
-      </a>
-    {% endfor %}
-  </div>
-{% else %}
-  <p class="tips-empty">아직 작성된 Tips가 없습니다.</p>
-{% endif %}
+<script>
+(function () {
+  var layout      = document.getElementById('tips-layout');
+  var peekPanel   = document.getElementById('tips-peek-panel');
+  var peekContent = document.getElementById('tips-peek-content');
+  var openBtn     = document.getElementById('tips-peek-open-btn');
+  var closeBtn    = document.getElementById('tips-peek-close');
+  var currentUrl  = null;
+
+  if (!layout || !peekContent) return;
+
+  var PLACEHOLDER = '<div class="tips-peek-placeholder">' +
+    '<div class="tips-peek-placeholder__arrow">\u2190</div>' +
+    '<p>\ubaa9\ub85d\uc5d0\uc11c Tip\uc744 \uc120\ud0dd\ud558\uba74<br>\uc5ec\uae30\uc5d0 \ud45c\uc2dc\ub429\ub2c8\ub2e4.</p></div>';
+
+  function isMobile() {
+    return window.innerWidth < 769;
+  }
+
+  function openTip(url, cardEl) {
+    if (url === currentUrl) return;
+    currentUrl = url;
+
+    // 활성 카드 표시
+    document.querySelectorAll('.tip-card').forEach(function (c) {
+      c.classList.remove('active');
+    });
+    if (cardEl) cardEl.classList.add('active');
+
+    // 패널 열기
+    layout.classList.add('peek-open');
+    peekContent.innerHTML = '<div class="tips-peek-loading"><i class="fa fa-spinner fa-spin" aria-hidden="true"></i></div>';
+    if (openBtn) openBtn.href = url;
+
+    fetch(url)
+      .then(function (r) { return r.text(); })
+      .then(function (html) {
+        var doc     = new DOMParser().parseFromString(html, 'text/html');
+        var tipPage = doc.querySelector('.tip-page');
+        if (tipPage) {
+          // Side peek 안에서는 뒤로가기 링크 제거
+          var footer = tipPage.querySelector('.tip-footer');
+          if (footer) footer.remove();
+          peekContent.innerHTML = tipPage.outerHTML;
+          peekPanel.scrollTop = 0;
+        } else {
+          peekContent.innerHTML = '<p class="tips-peek-error">콘텐츠를 불러올 수 없습니다.</p>';
+        }
+      })
+      .catch(function () {
+        peekContent.innerHTML = '<p class="tips-peek-error">오류가 발생했습니다.</p>';
+      });
+  }
+
+  function closePeek() {
+    layout.classList.remove('peek-open');
+    currentUrl = null;
+    document.querySelectorAll('.tip-card').forEach(function (c) {
+      c.classList.remove('active');
+    });
+    peekContent.innerHTML = PLACEHOLDER;
+  }
+
+  // 카드 클릭
+  document.querySelectorAll('.tip-card').forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      if (isMobile()) return; // 모바일: 일반 페이지 이동
+      e.preventDefault();
+      openTip(this.getAttribute('href'), this);
+    });
+  });
+
+  // 닫기 버튼
+  if (closeBtn) closeBtn.addEventListener('click', closePeek);
+
+  // Escape 키
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && currentUrl) closePeek();
+  });
+}());
+</script>
