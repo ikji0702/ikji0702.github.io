@@ -15,7 +15,7 @@ author_profile: true
 {% if site.tips.size > 0 %}
   {% assign sorted_tips = site.tips | sort: "date" | reverse %}
   <div class="tips-grid">
-    {% for tip in sorted_tips %}
+    {% for tip in sorted_tips %}{% unless tip.hidden %}
       <a href="{{ base_path }}{{ tip.url }}" class="tip-card">
         <div class="tip-card__date">{{ tip.date | date: "%Y.%m.%d" }}</div>
         <h3 class="tip-card__title">{{ tip.title }}</h3>
@@ -30,7 +30,7 @@ author_profile: true
           </div>
         {% endif %}
       </a>
-    {% endfor %}
+    {% endunless %}{% endfor %}
   </div>
 {% else %}
   <p class="tips-empty">아직 작성된 Tips가 없습니다.</p>

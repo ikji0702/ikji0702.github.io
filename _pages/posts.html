@@ -13,7 +13,7 @@ author_profile: true
 
 <div id="posts-container">
 {% capture written_year %}'None'{% endcapture %}
-{% for post in site.posts %}
+{% for post in site.posts %}{% unless post.hidden %}
   {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
   {% if year != written_year %}
     {% unless written_year == "'None'" %}</div>{% endunless %}
@@ -40,7 +40,7 @@ author_profile: true
       </div>
     </div>
   </div>
-{% endfor %}
+{% endunless %}{% endfor %}
 </div>
 </div>
 

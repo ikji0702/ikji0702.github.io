@@ -25,9 +25,10 @@ redirect_from:
        최대 3개가 표시되며, 날짜 역순으로 정렬됩니다.
        featured: true 인 글이 없으면 최신 글 3개가 대신 표시됩니다.
      ====================================================== -->
-{% assign featured_posts = site.posts | where: "featured", true | limit: 3 %}
+{% assign visible_posts = site.posts | where_exp: "p", "p.hidden != true" %}
+{% assign featured_posts = visible_posts | where: "featured", true | limit: 3 %}
 {% if featured_posts.size == 0 %}
-  {% assign featured_posts = site.posts | limit: 3 %}
+  {% assign featured_posts = visible_posts | limit: 3 %}
 {% endif %}
 
 <div class="home-section-header">
