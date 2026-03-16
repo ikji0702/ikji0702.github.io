@@ -74,7 +74,7 @@ redirect_from:
       <span class="portfolio-card__role">AD / PM / Lighting Artist </span>
     </div>
     <p class="portfolio-card__desc">
-      게임 '하늘섬'은 2022년 청강문화산업대학교 졸업작품으로 개발한 액션 어드벤처 게임입니다. 하늘섬이라는 그래픽 컨셉과 단기간에 높은 완성도를 보여준 작품이라는 점에서 큰 관심을 받았습니다. Steam에서 무료로 플레이 가능합니다.
+      게임 '하늘섬'은 2022년 청강문화산업대학교 졸업작품으로 개발한 액션 어드벤처 게임입니다. Steam에서 무료로 플레이 가능합니다.
     </p>
     <div class="portfolio-card__tags">
       <span class="tag-chip">Unity URP</span>
