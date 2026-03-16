@@ -11,9 +11,9 @@ redirect_from:
 {% include base_path %}
 
 <div class="home-hero">
-  <p class="home-hero__greeting">Game Dev · Graphics · Optimization</p>
+  <p class="home-hero__greeting">Game Dev · Graphics</p>
   <h1 class="home-hero__title">개발 끄적대기</h1>
-  <p class="home-hero__desc">게임 그래픽스, 렌더링, 성능 최적화에 대해 공부한 것들을 기록합니다. 틀릴 수 있고, 배우는 중입니다.</p>
+  <p class="home-hero__desc">게임 그래픽스에 대해 공부한 것들을 기록합니다.</br> 틀릴 수 있고, 배우는 중입니다.</p>
 </div>
 
 <!-- ======================================================
@@ -81,5 +81,5 @@ redirect_from:
       <span class="tag-chip">Unity URP</span>
       <span class="tag-chip">Student Project</span>
     </div>
-    <a href="hhttps://store.steampowered.com/app/2302640/SkyIsland/" class="portfolio-card__link" target="_blank">자세히 보기 →</a>
+    <a href="https://store.steampowered.com/app/2302640/SkyIsland/" class="portfolio-card__link" target="_blank">자세히 보기 →</a>
   </div>
