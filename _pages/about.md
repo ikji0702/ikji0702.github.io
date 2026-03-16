@@ -13,7 +13,7 @@ redirect_from:
 <div class="home-hero">
   <p class="home-hero__greeting">Game Dev · Graphics</p>
   <h1 class="home-hero__title">개발 끄적대기</h1>
-  <p class="home-hero__desc">게임 그래픽스에 대해 공부한 것들을 기록합니다.</br> 틀릴 수 있고, 배우는 중입니다.</p>
+  <p class="home-hero__desc">게임 그래픽스에 대해 공부한 것들을 기록합니다.<br> 틀릴 수 있고, 배우는 중입니다.</p>
 </div>
 
 <!-- ======================================================
